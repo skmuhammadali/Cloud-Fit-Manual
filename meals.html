@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CloudFit - Age & Calories Input</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1554284126-aa88f22d8b74');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: white;
+    }
+
+    nav {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+
+    .logout-btn {
+      background-color: #dc3545;
+      color: white;
+      padding: 8px 16px;
+      margin-left: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 80px);
+    }
+
+    .form-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #000;
+      width: 350px;
+      text-align: center;
+    }
+
+    .form-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .form-box input[type="number"] {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .form-box input[type="submit"] {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .form-box input[type="submit"]:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h1>CloudFit</h1>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="meals.html">Meals</a>
+      <a href="contact.html">Contact</a>
+      <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+    </div>
+  </nav>
+
+  <div class="form-container">
+    <div class="form-box">
+      <h2>Enter Age & Calorie Intake</h2>
+      <form action="submit_success.html" method="POST">
+        <input type="number" name="age" placeholder="Enter your age" required /><br />
+        <input type="number" name="calories" placeholder="Calories intake" required /><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

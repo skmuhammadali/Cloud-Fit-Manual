@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CloudFit - Contact Us</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1598970434795-0c54fe7c0642');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color: white;
+    }
+
+    nav {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 80px);
+    }
+
+    .contact-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #000;
+      width: 400px;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .contact-box input[type="text"],
+    .contact-box input[type="email"],
+    .contact-box textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .contact-box input[type="submit"] {
+      background-color: #ffc107;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .contact-box input[type="submit"]:hover {
+      background-color: #e0a800;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h1>CloudFit</h1>
+    <div class="nav-links">
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="meals.html">Meals</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="contact-container">
+    <div class="contact-box">
+      <h2>Contact Us - Meals</h2>
+      <form action="thankyou.html" method="POST">
+        <input type="text" name="fullname" placeholder="Full Name" required /><br />
+        <input type="email" name="email" placeholder="Email" required /><br />
+        <input type="text" name="mobile" placeholder="Mobile Number" required /><br />
+        <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
