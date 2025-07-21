@@ -4,27 +4,166 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>CloudFit | Login</title>
+  <title>FitLife - Your Personal Diet Plan Generator</title>
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 60px 40px;
+      text-align: center;
+      max-width: 600px;
+      margin: 20px;
+    }
+
+    .hero-title {
+      color: #333;
+      font-weight: 700;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      color: #666;
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .features {
+      margin: 40px 0;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 15px 0;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-right: 15px;
+      color: #667eea;
+    }
+
+    .btn-start {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      padding: 18px 50px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+
+    .requirements {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 25px;
+      margin-top: 40px;
+      border-left: 5px solid #667eea;
+    }
+
+    .requirements h5 {
+      color: #333;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .requirements ul {
+      margin: 0;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .hero-container {
+        padding: 40px 20px;
+        margin: 10px;
+      }
+      
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <h2 class="text-center mt-5">Login</h2>
-    <form id="loginForm" method="POST" action="login.php" class="mt-4">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" id="email" required>
+  <div class="hero-container">
+    <h1 class="hero-title">🥗 FitLife</h1>
+    <p class="hero-subtitle">
+      Transform your health with personalized diet plans designed just for you!
+      <br>Get a customized nutrition plan based on your goals, lifestyle, and preferences.
+    </p>
+
+    <div class="features">
+      <div class="feature-item">
+        <span class="feature-icon">🎯</span>
+        <span>Personalized diet plans based on your goals</span>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" id="password" required>
+      <div class="feature-item">
+        <span class="feature-icon">📊</span>
+        <span>Scientifically calculated calorie and macro targets</span>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-success w-100 mt-3">Login</button>
+      <div class="feature-item">
+        <span class="feature-icon">🍽️</span>
+        <span>Meal suggestions for various dietary preferences</span>
       </div>
-    </form>
-    <p class="mt-3 text-center">Don't have an account? <a href="register.html">Register here</a></p>
+      <div class="feature-item">
+        <span class="feature-icon">⏱️</span>
+        <span>Realistic timeline estimates for your goals</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💪</span>
+        <span>Activity level-based recommendations</span>
+      </div>
+    </div>
+
+    <a href="diet_plan.html" class="btn-start">
+      🚀 Create My Diet Plan
+    </a>
+
+    <div class="requirements">
+      <h5>📋 Eligibility Requirements</h5>
+      <ul>
+        <li><strong>Age:</strong> 20-70 years</li>
+        <li><strong>Weight:</strong> 30-100 kg</li>
+        <li><strong>Commitment:</strong> Ready to follow a healthy lifestyle</li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 30px; color: #888; font-size: 0.9rem;">
+      <p>⚠️ <strong>Disclaimer:</strong> This tool provides general dietary guidance. Please consult with a healthcare professional before starting any new diet plan, especially if you have medical conditions.</p>
+    </div>
   </div>
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
