@@ -3,140 +3,423 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>1000 Calorie Veg & Non-Veg Meals</title>
+  <title>1000 Calorie Indian Veg & Non-Veg Meals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #fdfdfd;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #27592d 75%, #ff6b35 100%);
       margin: 0;
       padding: 20px;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Indian Pattern Background */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+      z-index: 0;
     }
 
     h1 {
       text-align: center;
-      color: #444;
+      color: #27592d;
       margin-bottom: 40px;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 20px;
+      border: 3px solid #ff6b35;
+      position: relative;
+      z-index: 1;
+    }
+
+    .indian-flag {
+      display: inline-block;
+      width: 30px;
+      height: 20px;
+      background: linear-gradient(to bottom, #ff6b35 33%, white 33%, white 66%, #27592d 66%);
+      border-radius: 3px;
+      margin: 0 10px;
+      vertical-align: middle;
     }
 
     .container {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 30px;
       justify-content: center;
+      position: relative;
+      z-index: 1;
     }
 
     .card {
-      flex: 1 1 350px;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex: 1 1 400px;
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      backdrop-filter: blur(10px);
+      border: 3px solid;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
     }
 
     .veg {
-      background: #e6fff5;
-      border-left: 6px solid #2e8b57;
+      background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+      border-color: #27592d;
+    }
+
+    .veg::before {
+      content: '🌱';
+      position: absolute;
+      top: -15px;
+      left: 30px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 18px;
     }
 
     .nonveg {
-      background: #fff5f2;
-      border-left: 6px solid #b22222;
+      background: linear-gradient(135deg, #fff5f0 0%, #ffe6e6 100%);
+      border-color: #ff6b35;
+    }
+
+    .nonveg::before {
+      content: '🍗';
+      position: absolute;
+      top: -15px;
+      left: 30px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 18px;
     }
 
     h2 {
       margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-align: center;
     }
+
+    .veg h2 {
+      color: #27592d;
+    }
+
+    .nonveg h2 {
+      color: #ff6b35;
+    }
+
+    .meal-section {
+      margin-bottom: 25px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .meal-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #333;
+      border-bottom: 2px solid #ff6b35;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .meal-title::before {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+
+    .breakfast::before { content: '🌅'; }
+    .lunch::before { content: '🍛'; }
+    .dinner::before { content: '🌙'; }
+    .snacks::before { content: '🍪'; }
 
     ul {
-      padding-left: 20px;
-      margin-bottom: 15px;
+      padding-left: 0;
+      list-style: none;
     }
 
-    .tip {
-      background: rgba(0,0,0,0.03);
-      padding: 10px;
-      border-left: 4px solid #888;
+    li {
+      margin-bottom: 12px;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      border-left: 4px solid #ff6b35;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    li:hover {
+      background: white;
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    li::before {
+      content: '🍽️';
+      margin-right: 10px;
+    }
+
+    .calories {
+      background: linear-gradient(135deg, #ff6b35 0%, #27592d 100%);
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .disclaimer {
+      background: linear-gradient(135deg, #fff2e6 0%, #ffe6cc 100%);
+      border-radius: 20px;
+      padding: 25px;
+      margin: 30px auto;
+      max-width: 800px;
+      border: 2px solid #ff6b35;
+      position: relative;
+      z-index: 1;
+    }
+
+    .disclaimer::before {
+      content: '⚠️';
+      position: absolute;
+      top: -12px;
+      left: 30px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .disclaimer h3 {
+      color: #d2691e;
+      font-weight: 700;
       margin-bottom: 15px;
-      font-style: italic;
+      text-align: center;
+    }
+
+    .disclaimer p {
+      color: #d2691e;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .nutritionist-note {
+      background: linear-gradient(135deg, #e6ffe6 0%, #ccffcc 100%);
+      border-radius: 20px;
+      padding: 25px;
+      margin: 20px auto;
+      max-width: 800px;
+      border: 2px solid #27592d;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nutritionist-note p {
+      margin: 0;
+      color: #27592d;
+      font-size: 1.1rem;
+      font-weight: 600;
     }
 
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
+        gap: 20px;
       }
+      
+      .card {
+        flex: none;
+        margin: 0 auto;
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+        padding: 15px;
+      }
+
+      .meal-title {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Floating Elements */
+    .floating-spice {
+      position: absolute;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.1;
+      font-size: 1.5rem;
+      z-index: 0;
+    }
+
+    .spice-1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .spice-2 { top: 20%; right: 8%; animation-delay: 2s; }
+    .spice-3 { bottom: 30%; left: 10%; animation-delay: 4s; }
+    .spice-4 { bottom: 20%; right: 5%; animation-delay: 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
     }
   </style>
 </head>
 <body>
-  <h1>1000 Calorie Meal Plans – Veg & Non-Veg</h1>
+  <!-- Floating Spice Elements -->
+  <div class="floating-spice spice-1">🌶️</div>
+  <div class="floating-spice spice-2">🧄</div>
+  <div class="floating-spice spice-3">🧅</div>
+  <div class="floating-spice spice-4">🌿</div>
+
+  <h1>
+    <span class="indian-flag"></span>
+    1000 Calorie Indian Meals
+    <span class="indian-flag"></span>
+    <br>
+    <small style="font-size: 1.2rem; color: #555;">शाकाहारी और मांसाहारी भोजन (Veg & Non-Veg Options)</small>
+  </h1>
 
   <div class="container">
-    <!-- VEG MEAL -->
     <div class="card veg">
-      <h2>🥗 Vegetarian Meal Plan</h2>
+      <h2>🌱 शाकाहारी भोजन (Vegetarian Meals)</h2>
+      
+      <div class="meal-section">
+        <div class="meal-title breakfast">नाश्ता (Breakfast) - 250 Cal</div>
+        <ul>
+          <li>दलिया उपमा (1 कटोरी) + छाछ (1 गिलास)<br><small>Daliya Upma (1 bowl) + Buttermilk (1 glass)</small></li>
+          <li>पोहा (1 प्लेट) + चाय (1 कप)<br><small>Poha (1 plate) + Tea (1 cup)</small></li>
+          <li>इडली (2 पीस) + सांभर + नारियल चटनी<br><small>Idli (2 pieces) + Sambar + Coconut Chutney</small></li>
+          <li>ओट्स (1 कटोरी) + दूध + केला<br><small>Oats (1 bowl) + Milk + Banana</small></li>
+        </ul>
+      </div>
 
-      <h3>🌅 Breakfast (~300 kcal)</h3>
-      <ul>
-        <li>1/2 cup rolled oats</li>
-        <li>1/2 banana, sliced</li>
-        <li>1 tsp peanut butter</li>
-        <li>1 tsp chia seeds</li>
-        <li>1/2 cup almond milk (unsweetened)</li>
-        <li>2 almonds chopped</li>
-      </ul>
-      <div class="tip">Warm it up or soak overnight for a chilled version.</div>
+      <div class="meal-section">
+        <div class="meal-title lunch">दोपहर का खाना (Lunch) - 400 Cal</div>
+        <ul>
+          <li>दाल चावल (1 कटोरी) + सब्जी + रोटी (1)<br><small>Dal Rice (1 bowl) + Vegetable + Roti (1)</small></li>
+          <li>राजमा (1 कटोरी) + चावल + सलाद<br><small>Rajma (1 bowl) + Rice + Salad</small></li>
+          <li>छोले (1 कटोरी) + रोटी (2) + प्याज<br><small>Chole (1 bowl) + Roti (2) + Onions</small></li>
+          <li>सांभर चावल + रसम + पापड़<br><small>Sambar Rice + Rasam + Papad</small></li>
+        </ul>
+      </div>
 
-      <h3>🥗 Lunch (~400 kcal)</h3>
-      <ul>
-        <li>1/2 cup cooked quinoa</li>
-        <li>1/2 cup boiled chickpeas</li>
-        <li>1/4 avocado</li>
-        <li>Veggies: cucumber, tomato, onion</li>
-        <li>1 tsp olive oil + lemon dressing</li>
-      </ul>
-      <div class="tip">Add fresh herbs like mint or parsley.</div>
+      <div class="meal-section">
+        <div class="meal-title dinner">रात का खाना (Dinner) - 300 Cal</div>
+        <ul>
+          <li>रोटी (2) + दाल + सब्जी + सलाद<br><small>Roti (2) + Dal + Vegetable + Salad</small></li>
+          <li>खिचड़ी + दही + पापड़<br><small>Khichdi + Curd + Papad</small></li>
+          <li>दोसा (1) + सांभर + चटनी<br><small>Dosa (1) + Sambar + Chutney</small></li>
+          <li>पराठा (1) + दही + अचार<br><small>Paratha (1) + Curd + Pickle</small></li>
+        </ul>
+      </div>
 
-      <h3>🌙 Dinner (~300 kcal)</h3>
-      <ul>
-        <li>1/2 cup cooked brown rice</li>
-        <li>1 tsp sesame oil</li>
-        <li>Stir-fried veggies</li>
-        <li>1 tsp soy sauce or tamari</li>
-        <li>Sesame seeds</li>
-      </ul>
-      <div class="tip">Top with chili flakes for a spicy touch.</div>
+      <div class="meal-section">
+        <div class="meal-title snacks">नाश्ता (Snacks) - 50 Cal</div>
+        <ul>
+          <li>चना चाट + चाय<br><small>Chana Chaat + Tea</small></li>
+          <li>फल + दूध<br><small>Fruits + Milk</small></li>
+          <li>भेल पुरी + नींबू पानी<br><small>Bhel Puri + Lemon Water</small></li>
+        </ul>
+      </div>
+
+      <div class="calories">
+        कुल कैलोरी: 1000 Cal<br>
+        Total Calories: 1000 Cal
+      </div>
     </div>
 
-    <!-- NON-VEG MEAL -->
     <div class="card nonveg">
-      <h2>🍗 Non-Vegetarian Meal Plan</h2>
+      <h2>🍗 मांसाहारी भोजन (Non-Vegetarian Meals)</h2>
+      
+      <div class="meal-section">
+        <div class="meal-title breakfast">नाश्ता (Breakfast) - 250 Cal</div>
+        <ul>
+          <li>अंडा ऑमलेट (2 अंडे) + रोटी (1) + चाय<br><small>Egg Omelette (2 eggs) + Roti (1) + Tea</small></li>
+          <li>उबले अंडे (2) + ब्रेड (2 स्लाइस) + चाय<br><small>Boiled Eggs (2) + Bread (2 slices) + Tea</small></li>
+          <li>अंडा पराठा (1) + दही<br><small>Egg Paratha (1) + Curd</small></li>
+          <li>पोहा + अंडा + चाय<br><small>Poha + Egg + Tea</small></li>
+        </ul>
+      </div>
 
-      <h3>🌅 Breakfast (~300 kcal)</h3>
-      <ul>
-        <li>2 boiled eggs</li>
-        <li>1 slice whole wheat toast</li>
-        <li>1 tsp butter or ghee</li>
-        <li>1/2 apple or orange</li>
-      </ul>
-      <div class="tip">Sprinkle pepper or chili flakes on eggs.</div>
+      <div class="meal-section">
+        <div class="meal-title lunch">दोपहर का खाना (Lunch) - 400 Cal</div>
+        <ul>
+          <li>चिकन करी + चावल + रोटी (1)<br><small>Chicken Curry + Rice + Roti (1)</small></li>
+          <li>मटन बिरयानी (1 प्लेट) + रायता<br><small>Mutton Biryani (1 plate) + Raita</small></li>
+          <li>फिश करी + चावल + सलाद<br><small>Fish Curry + Rice + Salad</small></li>
+          <li>अंडा करी + रोटी (2) + सलाद<br><small>Egg Curry + Roti (2) + Salad</small></li>
+        </ul>
+      </div>
 
-      <h3>🍛 Lunch (~400 kcal)</h3>
-      <ul>
-        <li>100g grilled chicken breast</li>
-        <li>1/2 cup cooked brown rice or quinoa</li>
-        <li>Mixed salad with lemon dressing</li>
-        <li>1 tsp olive oil</li>
-        <li>Plain curd or yogurt</li>
-      </ul>
-      <div class="tip">Use garlic and paprika to marinate chicken.</div>
+      <div class="meal-section">
+        <div class="meal-title dinner">रात का खाना (Dinner) - 300 Cal</div>
+        <ul>
+          <li>चिकन टिक्का + रोटी (1) + सलाद<br><small>Chicken Tikka + Roti (1) + Salad</small></li>
+          <li>फिश फ्राई + चावल + दाल<br><small>Fish Fry + Rice + Dal</small></li>
+          <li>मटन करी + रोटी (1) + सब्जी<br><small>Mutton Curry + Roti (1) + Vegetable</small></li>
+          <li>अंडा भुर्जी + पराठा (1)<br><small>Egg Bhurji + Paratha (1)</small></li>
+        </ul>
+      </div>
 
-      <h3>🌙 Dinner (~300 kcal)</h3>
-      <ul>
-        <li>100g grilled or baked fish</li>
-        <li>Steamed or roasted veggies</li>
-        <li>1 tsp olive oil or ghee</li>
-      </ul>
-      <div class="tip">Add lemon juice and herbs for extra flavor.</div>
+      <div class="meal-section">
+        <div class="meal-title snacks">नाश्ता (Snacks) - 50 Cal</div>
+        <ul>
+          <li>चिकन टिक्का (2 पीस) + चाय<br><small>Chicken Tikka (2 pieces) + Tea</small></li>
+          <li>उबला अंडा (1) + चाय<br><small>Boiled Egg (1) + Tea</small></li>
+          <li>फिश कटलेट (1) + चाय<br><small>Fish Cutlet (1) + Tea</small></li>
+        </ul>
+      </div>
+
+      <div class="calories">
+        कुल कैलोरी: 1000 Cal<br>
+        Total Calories: 1000 Cal
+      </div>
     </div>
+  </div>
+
+  <div class="disclaimer">
+    <h3>⚠️ महत्वपूर्ण अस्वीकरण (Important Disclaimer)</h3>
+    <p><strong>यह आहार योजना आवश्यक है, पोषण विशेषज्ञ द्वारा अनुशंसित नहीं।</strong></p>
+    <p><strong>This diet plan is necessary but NOT recommended by a dietitian.</strong></p>
+    <p>यह केवल सामान्य मार्गदर्शन प्रदान करता है। कृपया किसी भी नई आहार योजना शुरू करने से पहले योग्य पोषण विशेषज्ञ या स्वास्थ्य सेवा प्रदाता से सलाह लें।</p>
+  </div>
+
+  <div class="nutritionist-note">
+    <p>📞 <strong>अत्यंत महत्वपूर्ण:</strong> आहार योजना प्राप्त करने के बाद, व्यक्तिगत मार्गदर्शन और चिकित्सा निरीक्षण के लिए कृपया किसी योग्य पोषण विशेषज्ञ से मिलें!</p>
+    <p><strong>EXTREMELY IMPORTANT:</strong> After receiving your diet plan, please visit a qualified nutritionist for personalized guidance and medical supervision!</p>
   </div>
 </body>
 </html>

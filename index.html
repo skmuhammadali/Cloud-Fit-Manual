@@ -4,165 +4,367 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>FitLife - Your Personal Diet Plan Generator</title>
+  <title>FitLife - Your Personal Indian Diet Plan Generator</title>
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #27592d 75%, #ff6b35 100%);
+      font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Indian Pattern Background */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+      z-index: 0;
     }
 
     .hero-container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(15px);
       padding: 60px 40px;
       text-align: center;
-      max-width: 600px;
+      max-width: 700px;
       margin: 20px;
+      position: relative;
+      z-index: 1;
+      border: 3px solid #ff6b35;
+    }
+
+    .hero-container::before {
+      content: '🕉️';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 5px 15px;
+      font-size: 24px;
+      border-radius: 50%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
     .hero-title {
-      color: #333;
+      color: #27592d;
       font-weight: 700;
-      font-size: 3rem;
-      margin-bottom: 20px;
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .hero-subtitle {
-      color: #666;
-      font-size: 1.3rem;
-      margin-bottom: 30px;
-      line-height: 1.6;
+      color: #555;
+      font-size: 1.4rem;
+      margin-bottom: 35px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .indian-flag {
+      display: inline-block;
+      width: 30px;
+      height: 20px;
+      background: linear-gradient(to bottom, #ff6b35 33%, white 33%, white 66%, #27592d 66%);
+      border-radius: 3px;
+      margin: 0 10px;
+      vertical-align: middle;
+      position: relative;
+    }
+
+    .indian-flag::after {
+      content: '☸';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000080;
+      font-size: 8px;
     }
 
     .features {
       margin: 40px 0;
+      background: linear-gradient(135deg, #fff5f0 0%, #f0fff4 100%);
+      border-radius: 20px;
+      padding: 30px 20px;
+      border: 2px solid #ff6b35;
     }
 
     .feature-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 15px 0;
-      font-size: 1.1rem;
-      color: #555;
+      justify-content: flex-start;
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: #333;
+      padding: 15px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     }
 
     .feature-icon {
-      font-size: 1.5rem;
-      margin-right: 15px;
-      color: #667eea;
+      font-size: 2rem;
+      margin-right: 20px;
+      color: #ff6b35;
+      min-width: 50px;
     }
 
     .btn-start {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #27592d 100%);
       border: none;
       border-radius: 50px;
       color: white;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 600;
-      padding: 18px 50px;
-      transition: all 0.3s ease;
+      padding: 20px 60px;
+      transition: all 0.4s ease;
       text-decoration: none;
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 25px;
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-start::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-start:hover::before {
+      left: 100%;
     }
 
     .btn-start:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(255, 107, 53, 0.4);
       color: white;
       text-decoration: none;
     }
 
     .requirements {
-      background: #f8f9fa;
-      border-radius: 15px;
-      padding: 25px;
+      background: linear-gradient(135deg, #fff5f0 0%, #f0fff4 100%);
+      border-radius: 20px;
+      padding: 30px;
       margin-top: 40px;
-      border-left: 5px solid #667eea;
+      border: 3px solid #27592d;
+      position: relative;
+    }
+
+    .requirements::before {
+      content: '🏥';
+      position: absolute;
+      top: -15px;
+      left: 30px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 20px;
     }
 
     .requirements h5 {
-      color: #333;
-      margin-bottom: 15px;
-      font-weight: 600;
+      color: #27592d;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.3rem;
     }
 
     .requirements ul {
       margin: 0;
-      color: #666;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    .requirements li {
+      margin-bottom: 8px;
+      padding-left: 10px;
+    }
+
+    .disclaimer {
+      background: linear-gradient(135deg, #fff2e6 0%, #ffe6cc 100%);
+      border-radius: 20px;
+      padding: 25px;
+      margin-top: 30px;
+      border: 2px solid #ff6b35;
+      position: relative;
+    }
+
+    .disclaimer::before {
+      content: '⚠️';
+      position: absolute;
+      top: -12px;
+      left: 30px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .disclaimer p {
+      margin: 0;
+      color: #d2691e;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .nutritionist-note {
+      background: linear-gradient(135deg, #e6ffe6 0%, #ccffcc 100%);
+      border-radius: 20px;
+      padding: 25px;
+      margin-top: 20px;
+      border: 2px solid #27592d;
+      text-align: center;
+    }
+
+    .nutritionist-note p {
+      margin: 0;
+      color: #27592d;
+      font-size: 1.1rem;
+      font-weight: 600;
     }
 
     @media (max-width: 768px) {
       .hero-container {
-        padding: 40px 20px;
-        margin: 10px;
+        padding: 40px 25px;
+        margin: 15px;
       }
       
       .hero-title {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
       }
       
       .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
+
+      .feature-item {
+        font-size: 1.1rem;
+        padding: 12px;
+      }
+
+      .feature-icon {
+        font-size: 1.8rem;
+        margin-right: 15px;
+        min-width: 40px;
+      }
+
+      .btn-start {
+        font-size: 18px;
+        padding: 16px 40px;
+      }
+    }
+
+    /* Floating Elements */
+    .floating-spice {
+      position: absolute;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.1;
+      font-size: 2rem;
+      z-index: 0;
+    }
+
+    .spice-1 { top: 10%; left: 10%; animation-delay: 0s; }
+    .spice-2 { top: 20%; right: 15%; animation-delay: 2s; }
+    .spice-3 { bottom: 30%; left: 20%; animation-delay: 4s; }
+    .spice-4 { bottom: 20%; right: 10%; animation-delay: 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
   </style>
 </head>
 
 <body>
+  <!-- Floating Spice Elements -->
+  <div class="floating-spice spice-1">🌶️</div>
+  <div class="floating-spice spice-2">🧄</div>
+  <div class="floating-spice spice-3">🧅</div>
+  <div class="floating-spice spice-4">🌿</div>
+
   <div class="hero-container">
-    <h1 class="hero-title">🥗 FitLife</h1>
+    <h1 class="hero-title">🥗 FitLife India</h1>
     <p class="hero-subtitle">
-      Transform your health with personalized diet plans designed just for you!
-      <br>Get a customized nutrition plan based on your goals, lifestyle, and preferences.
+      <span class="indian-flag"></span>
+      स्वस्थ भारत, सुंदर भारत! Transform your health with personalized Indian diet plans
+      <span class="indian-flag"></span>
+      <br>Get authentic desi nutrition plans based on your goals, lifestyle, and Indian food preferences!
     </p>
 
     <div class="features">
       <div class="feature-item">
         <span class="feature-icon">🎯</span>
-        <span>Personalized diet plans based on your goals</span>
+        <span><strong>Personalized Indian Diet Plans</strong> - Tailored for your body and goals</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🍛</span>
+        <span><strong>Authentic Desi Meals</strong> - Dal, Roti, Sabzi, Rice & Regional Specialties</span>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🌱</span>
+        <span><strong>Veg & Non-Veg Options</strong> - Respecting your dietary preferences</span>
       </div>
       <div class="feature-item">
         <span class="feature-icon">📊</span>
-        <span>Scientifically calculated calorie and macro targets</span>
-      </div>
-      <div class="feature-item">
-        <span class="feature-icon">🍽️</span>
-        <span>Meal suggestions for various dietary preferences</span>
-      </div>
-      <div class="feature-item">
-        <span class="feature-icon">⏱️</span>
-        <span>Realistic timeline estimates for your goals</span>
+        <span><strong>Scientific Calculations</strong> - Proper calorie and macro targets</span>
       </div>
       <div class="feature-item">
         <span class="feature-icon">💪</span>
-        <span>Activity level-based recommendations</span>
+        <span><strong>Realistic Goals</strong> - Achievable timelines for Indian lifestyle</span>
       </div>
     </div>
 
     <a href="diet_plan.html" class="btn-start">
-      🚀 Create My Diet Plan
+      🚀 Create My Indian Diet Plan
     </a>
 
     <div class="requirements">
-      <h5>📋 Eligibility Requirements</h5>
+      <h5>📋 योग्यता आवश्यकताएं (Eligibility Requirements)</h5>
       <ul>
-        <li><strong>Age:</strong> 20-70 years</li>
-        <li><strong>Weight:</strong> 30-100 kg</li>
-        <li><strong>Commitment:</strong> Ready to follow a healthy lifestyle</li>
+        <li><strong>आयु (Age):</strong> 18-70 years</li>
+        <li><strong>वजन (Weight):</strong> 30-120 kg</li>
+        <li><strong>प्रतिबद्धता (Commitment):</strong> Ready to follow healthy Indian lifestyle</li>
+        <li><strong>खाना (Food):</strong> Open to traditional Indian foods</li>
       </ul>
     </div>
 
-    <div style="margin-top: 30px; color: #888; font-size: 0.9rem;">
-      <p>⚠️ <strong>Disclaimer:</strong> This tool provides general dietary guidance. Please consult with a healthcare professional before starting any new diet plan, especially if you have medical conditions.</p>
+    <div class="disclaimer">
+      <p><strong>⚠️ अस्वीकरण (Disclaimer):</strong> यह आहार योजना आवश्यक है, पोषण विशेषज्ञ द्वारा अनुशंसित नहीं। This diet plan is necessary but not recommended by a dietitian. Please consult with a qualified nutritionist or healthcare professional before starting any new diet plan.</p>
+    </div>
+
+    <div class="nutritionist-note">
+      <p>📞 <strong>Important:</strong> After receiving your diet plan, please visit a qualified nutritionist for personalized guidance and medical supervision!</p>
     </div>
   </div>
 

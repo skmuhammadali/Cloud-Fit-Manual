@@ -4,149 +4,323 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>FitLife | Personalized Diet Plans</title>
+  <title>FitLife India | Personalized Indian Diet Plans</title>
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #27592d 75%, #ff6b35 100%);
+      font-family: 'Poppins', sans-serif;
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Indian Pattern Background */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+      z-index: 0;
     }
 
     .main-container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(15px);
       margin: 20px auto;
-      max-width: 800px;
+      max-width: 900px;
       padding: 40px;
+      position: relative;
+      z-index: 1;
+      border: 3px solid #ff6b35;
+    }
+
+    .main-container::before {
+      content: '🇮🇳';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 5px 15px;
+      font-size: 24px;
+      border-radius: 50%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
     .header {
       text-align: center;
       margin-bottom: 40px;
+      background: linear-gradient(135deg, #fff5f0 0%, #f0fff4 100%);
+      border-radius: 20px;
+      padding: 30px;
+      border: 2px solid #ff6b35;
     }
 
     .header h1 {
-      color: #333;
+      color: #27592d;
       font-weight: 700;
-      margin-bottom: 10px;
-      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-size: 2.8rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .header p {
-      color: #666;
-      font-size: 1.1rem;
+      color: #555;
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      line-height: 1.6;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      color: #27592d;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: block;
     }
 
     .form-control {
-      border-radius: 10px;
-      border: 2px solid #e0e0e0;
-      padding: 12px 15px;
+      border-radius: 15px;
+      border: 2px solid #ff6b35;
+      padding: 15px 20px;
       font-size: 16px;
       transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .form-control:focus {
-      border-color: #667eea;
-      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+      border-color: #27592d;
+      box-shadow: 0 0 0 0.2rem rgba(39, 89, 45, 0.25);
+      background: white;
     }
 
     .btn-generate {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #27592d 100%);
       border: none;
-      border-radius: 50px;
+      border-radius: 25px;
       color: white;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
-      padding: 15px 40px;
-      transition: all 0.3s ease;
+      padding: 18px 50px;
       width: 100%;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-generate::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-generate:hover::before {
+      left: 100%;
     }
 
     .btn-generate:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
     }
 
     .error-message {
-      background: #ffe6e6;
-      border: 1px solid #ff9999;
-      border-radius: 8px;
-      color: #cc0000;
-      padding: 15px;
-      margin: 20px 0;
+      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+      color: #c62828;
+      border-radius: 15px;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border: 2px solid #e57373;
       display: none;
+      font-weight: 500;
     }
 
     .diet-plan-output {
-      background: #f8f9fa;
-      border-radius: 15px;
+      display: none;
+      background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+      border-radius: 20px;
       padding: 30px;
       margin-top: 30px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-      display: none;
+      border: 3px solid #27592d;
+      position: relative;
+    }
+
+    .diet-plan-output::before {
+      content: '🍛';
+      position: absolute;
+      top: -15px;
+      left: 30px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 20px;
     }
 
     .meal-card {
       background: white;
-      border-radius: 12px;
+      border-radius: 15px;
       padding: 20px;
       margin: 15px 0;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
+      border-left: 5px solid #ff6b35;
     }
 
     .meal-card:hover {
       transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     .meal-title {
-      color: #667eea;
-      font-weight: 600;
-      font-size: 1.3rem;
-      margin-bottom: 10px;
+      color: #27592d;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .meal-title::before {
+      content: '🍽️';
+      margin-right: 10px;
+      font-size: 1.2rem;
     }
 
     .nutrition-info {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #ff6b35 0%, #27592d 100%);
       color: white;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px 0;
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      text-align: center;
+    }
+
+    .nutrition-info h4 {
+      color: white;
+      margin-bottom: 20px;
+      font-weight: 700;
     }
 
     .guidelines {
-      background: #e8f4fd;
-      border-radius: 12px;
-      padding: 25px;
+      background: linear-gradient(135deg, #fff5f0 0%, #f0fff4 100%);
+      border-radius: 20px;
+      padding: 30px;
       margin-top: 30px;
+      border: 2px solid #ff6b35;
     }
 
     .guidelines h5 {
-      color: #2c5aa0;
-      margin-bottom: 15px;
+      color: #27592d;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .guidelines ul {
+      color: #555;
+      font-size: 1.05rem;
+    }
+
+    .guidelines li {
+      margin-bottom: 8px;
+      padding-left: 5px;
     }
 
     .validation-feedback {
       display: block;
       color: #dc3545;
-      font-size: 0.875em;
-      margin-top: 5px;
+      font-size: 0.9rem;
+      margin-top: 8px;
+      font-weight: 500;
     }
 
     .form-row {
       display: flex;
-      gap: 15px;
+      gap: 20px;
     }
 
     .form-row .form-group {
       flex: 1;
+    }
+
+    .disclaimer-section {
+      background: linear-gradient(135deg, #fff2e6 0%, #ffe6cc 100%);
+      border-radius: 20px;
+      padding: 25px;
+      margin-top: 30px;
+      border: 2px solid #ff6b35;
+      position: relative;
+    }
+
+    .disclaimer-section::before {
+      content: '⚠️';
+      position: absolute;
+      top: -12px;
+      left: 30px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .disclaimer-section h5 {
+      color: #d2691e;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .disclaimer-section p {
+      color: #d2691e;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .nutritionist-note {
+      background: linear-gradient(135deg, #e6ffe6 0%, #ccffcc 100%);
+      border-radius: 20px;
+      padding: 25px;
+      margin-top: 20px;
+      border: 2px solid #27592d;
+      text-align: center;
+    }
+
+    .nutritionist-note p {
+      margin: 0;
+      color: #27592d;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .indian-flag {
+      display: inline-block;
+      width: 25px;
+      height: 15px;
+      background: linear-gradient(to bottom, #ff6b35 33%, white 33%, white 66%, #27592d 66%);
+      border-radius: 2px;
+      margin: 0 8px;
+      vertical-align: middle;
     }
 
     @media (max-width: 768px) {
@@ -157,21 +331,55 @@
       
       .main-container {
         margin: 10px;
-        padding: 20px;
+        padding: 25px;
       }
       
       .header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
+
+      .header p {
+        font-size: 1.1rem;
+      }
+
+      .btn-generate {
+        font-size: 18px;
+        padding: 16px 40px;
+      }
+    }
+
+    /* Floating Elements */
+    .floating-spice {
+      position: absolute;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.1;
+      font-size: 1.5rem;
+      z-index: 0;
+    }
+
+    .spice-1 { top: 15%; left: 5%; animation-delay: 0s; }
+    .spice-2 { top: 25%; right: 8%; animation-delay: 2s; }
+    .spice-3 { bottom: 40%; left: 10%; animation-delay: 4s; }
+    .spice-4 { bottom: 25%; right: 5%; animation-delay: 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
     }
   </style>
 </head>
 
 <body>
+  <!-- Floating Spice Elements -->
+  <div class="floating-spice spice-1">🌶️</div>
+  <div class="floating-spice spice-2">🧄</div>
+  <div class="floating-spice spice-3">🧅</div>
+  <div class="floating-spice spice-4">🌿</div>
+
   <div class="main-container">
     <div class="header">
-      <h1>🥗 FitLife Diet Planner</h1>
-      <p>Get your personalized diet plan based on your health goals and lifestyle</p>
+      <h1>🥗 FitLife India Diet Planner</h1>
+      <p><span class="indian-flag"></span> स्वस्थ आहार, स्वस्थ जीवन! Get your personalized Indian diet plan based on your health goals and desi lifestyle <span class="indian-flag"></span></p>
     </div>
 
     <div class="error-message" id="errorMessage"></div>
@@ -179,93 +387,90 @@
     <form id="dietForm" novalidate>
       <div class="form-row">
         <div class="form-group">
-          <label for="name" class="form-label"><strong>Full Name</strong></label>
-          <input type="text" class="form-control" name="name" id="name" required>
+          <label for="name" class="form-label"><strong>पूरा नाम (Full Name)</strong></label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="Enter your full name" required>
           <div class="validation-feedback" id="nameError"></div>
         </div>
         
         <div class="form-group">
-          <label for="age" class="form-label"><strong>Age (20-70 years)</strong></label>
-          <input type="number" class="form-control" name="age" id="age" min="20" max="70" required>
+          <label for="age" class="form-label"><strong>आयु (Age: 18-70 years)</strong></label>
+          <input type="number" class="form-control" name="age" id="age" min="18" max="70" placeholder="Enter your age" required>
           <div class="validation-feedback" id="ageError"></div>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="current_weight" class="form-label"><strong>Current Weight (30-100 kg)</strong></label>
-          <input type="number" class="form-control" name="current_weight" id="current_weight" min="30" max="100" step="0.1" required>
+          <label for="current_weight" class="form-label"><strong>वर्तमान वजन (Current Weight: 30-120 kg)</strong></label>
+          <input type="number" class="form-control" name="current_weight" id="current_weight" min="30" max="120" step="0.1" placeholder="Enter current weight in kg" required>
           <div class="validation-feedback" id="weightError"></div>
         </div>
         
         <div class="form-group">
-          <label for="height" class="form-label"><strong>Height (cm)</strong></label>
-          <input type="number" class="form-control" name="height" id="height" min="120" max="250" required>
+          <label for="height" class="form-label"><strong>ऊंचाई (Height in cm)</strong></label>
+          <input type="number" class="form-control" name="height" id="height" min="120" max="250" placeholder="Enter height in cm" required>
           <div class="validation-feedback" id="heightError"></div>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="sex" class="form-label"><strong>Gender</strong></label>
+          <label for="sex" class="form-label"><strong>लिंग (Gender)</strong></label>
           <select name="sex" id="sex" class="form-control" required>
             <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
+            <option value="Male">पुरुष (Male)</option>
+            <option value="Female">महिला (Female)</option>
           </select>
           <div class="validation-feedback" id="sexError"></div>
         </div>
         
         <div class="form-group">
-          <label for="goal_weight" class="form-label"><strong>Goal Weight (30-100 kg)</strong></label>
-          <input type="number" class="form-control" name="goal_weight" id="goal_weight" min="30" max="100" step="0.1" required>
+          <label for="goal_weight" class="form-label"><strong>लक्ष्य वजन (Goal Weight: 30-120 kg)</strong></label>
+          <input type="number" class="form-control" name="goal_weight" id="goal_weight" min="30" max="120" step="0.1" placeholder="Enter target weight in kg" required>
           <div class="validation-feedback" id="goalWeightError"></div>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
-          <label for="activity_level" class="form-label"><strong>Activity Level</strong></label>
+          <label for="activity_level" class="form-label"><strong>गतिविधि स्तर (Activity Level)</strong></label>
           <select name="activity_level" id="activity_level" class="form-control" required>
             <option value="">Select Activity Level</option>
-            <option value="1.2">Sedentary (little or no exercise)</option>
-            <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
-            <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
-            <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
-            <option value="1.9">Super Active (very hard exercise & physical job)</option>
+            <option value="1.2">बैठे रहने वाला (Sedentary - little or no exercise)</option>
+            <option value="1.375">हल्की सक्रियता (Lightly Active - light exercise 1-3 days/week)</option>
+            <option value="1.55">मध्यम सक्रियता (Moderately Active - moderate exercise 3-5 days/week)</option>
+            <option value="1.725">अधिक सक्रियता (Very Active - hard exercise 6-7 days/week)</option>
+            <option value="1.9">अत्यधिक सक्रियता (Super Active - very hard exercise & physical job)</option>
           </select>
           <div class="validation-feedback" id="activityError"></div>
         </div>
         
         <div class="form-group">
-          <label for="meals_per_day" class="form-label"><strong>Meals per Day</strong></label>
+          <label for="meals_per_day" class="form-label"><strong>दैनिक भोजन (Meals per Day)</strong></label>
           <select name="meals_per_day" id="meals_per_day" class="form-control" required>
             <option value="">Select Meals</option>
-            <option value="3">3 Meals</option>
-            <option value="4">4 Meals</option>
-            <option value="5">5 Meals</option>
-            <option value="6">6 Meals</option>
+            <option value="3">3 भोजन (3 Meals)</option>
+            <option value="4">4 भोजन (4 Meals)</option>
+            <option value="5">5 भोजन (5 Meals)</option>
+            <option value="6">6 भोजन (6 Meals)</option>
           </select>
           <div class="validation-feedback" id="mealsError"></div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="dietary_preference" class="form-label"><strong>Dietary Preference</strong></label>
+        <label for="dietary_preference" class="form-label"><strong>आहार प्राथमिकता (Dietary Preference)</strong></label>
         <select name="dietary_preference" id="dietary_preference" class="form-control" required>
           <option value="">Select Preference</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="non-vegetarian">Non-Vegetarian</option>
-          <option value="vegan">Vegan</option>
-          <option value="keto">Keto</option>
-          <option value="mediterranean">Mediterranean</option>
+          <option value="veg">🌱 शाकाहारी (Vegetarian)</option>
+          <option value="non-veg">🍗 मांसाहारी (Non-Vegetarian)</option>
         </select>
         <div class="validation-feedback" id="dietaryError"></div>
       </div>
 
       <div class="form-group">
         <button type="submit" class="btn btn-generate">
-          🎯 Generate My Personal Diet Plan
+          🎯 मेरी व्यक्तिगत आहार योजना बनाएं (Generate My Personal Indian Diet Plan)
         </button>
       </div>
     </form>
@@ -273,311 +478,367 @@
     <!-- Diet Plan Output -->
     <div id="dietPlanOutput" class="diet-plan-output"></div>
 
+    <!-- Disclaimer Section -->
+    <div class="disclaimer-section">
+      <h5><strong>⚠️ महत्वपूर्ण अस्वीकरण (Important Disclaimer)</strong></h5>
+      <p><strong>यह आहार योजना आवश्यक है, पोषण विशेषज्ञ द्वारा अनुशंसित नहीं।</strong></p>
+      <p><strong>This diet plan is necessary but NOT recommended by a dietitian.</strong></p>
+      <p>यह केवल सामान्य मार्गदर्शन प्रदान करता है। कृपया किसी भी नई आहार योजना शुरू करने से पहले योग्य पोषण विशेषज्ञ या स्वास्थ्य सेवा प्रदाता से सलाह लें।</p>
+    </div>
+
+    <div class="nutritionist-note">
+      <p>📞 <strong>अत्यंत महत्वपूर्ण:</strong> आहार योजना प्राप्त करने के बाद, व्यक्तिगत मार्गदर्शन और चिकित्सा निरीक्षण के लिए कृपया किसी योग्य पोषण विशेषज्ञ से मिलें!</p>
+      <p><strong>EXTREMELY IMPORTANT:</strong> After receiving your diet plan, please visit a qualified nutritionist for personalized guidance and medical supervision!</p>
+    </div>
+
     <!-- Guidelines Section -->
     <div class="guidelines">
-      <h5><strong>📋 Important Guidelines</strong></h5>
+      <h5><strong>📋 महत्वपूर्ण दिशानिर्देश (Important Guidelines)</strong></h5>
       <ul>
-        <li><strong>Age Requirement:</strong> Diet plans are available for individuals aged 20-70 years</li>
-        <li><strong>Weight Range:</strong> Acceptable weight range is 30-100 kg</li>
-        <li><strong>Hydration:</strong> Drink at least 8-10 glasses of water daily</li>
-        <li><strong>Consistency:</strong> Follow the plan consistently for best results</li>
-        <li><strong>Medical Consultation:</strong> Consult with a healthcare provider before starting any new diet plan</li>
+        <li><strong>आयु आवश्यकता:</strong> आहार योजना 18-70 वर्ष की आयु के व्यक्तियों के लिए उपलब्ध है</li>
+        <li><strong>वजन सीमा:</strong> स्वीकार्य वजन सीमा 30-120 किलो है</li>
+        <li><strong>जल सेवन:</strong> दैनिक कम से कम 8-10 गिलास पानी पिएं</li>
+        <li><strong>निरंतरता:</strong> सर्वोत्तम परिणामों के लिए योजना का निरंतर पालन करें</li>
+        <li><strong>चिकित्सा सलाह:</strong> कोई भी नई आहार योजना शुरू करने से पहले स्वास्थ्य सेवा प्रदाता से सलाह लें</li>
       </ul>
       
-      <h5><strong>🍰 Cheat Days Policy</strong></h5>
+      <h5><strong>🍰 चीट डे नीति (Cheat Days Policy)</strong></h5>
       <ul>
-        <li>Maximum 3 cheat days per month allowed</li>
-        <li>Space out cheat days evenly throughout the month</li>
-        <li>Return to your regular plan immediately after a cheat day</li>
-        <li>Use cheat days as motivation, not as an excuse to overindulge</li>
+        <li>महीने में अधिकतम 3 चीट डे की अनुमति है</li>
+        <li>चीट डे को पूरे महीने में समान रूप से वितरित करें</li>
+        <li>चीट डे के तुरंत बाद अपनी नियमित योजना पर वापस लौटें</li>
+        <li>चीट डे का उपयोग प्रेरणा के रूप में करें, अधिक खाने के बहाने के रूप में नहीं</li>
       </ul>
     </div>
   </div>
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Comprehensive diet plan generator with validation
+    // Comprehensive Indian diet plan generator with validation
     document.getElementById("dietForm").addEventListener("submit", function (e) {
       e.preventDefault();
       
       // Clear previous errors
       clearErrors();
       
-      // Get form data
-      const formData = getFormData();
-      
       // Validate form
-      if (!validateForm(formData)) {
+      if (!validateForm()) {
         return;
       }
       
-      // Generate and display diet plan
-      generateDietPlan(formData);
+      // Get form data
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      // Generate diet plan
+      generateIndianDietPlan(data);
     });
 
-    function getFormData() {
-      return {
-        name: document.getElementById("name").value.trim(),
-        age: parseInt(document.getElementById("age").value),
-        currentWeight: parseFloat(document.getElementById("current_weight").value),
-        height: parseInt(document.getElementById("height").value),
-        sex: document.getElementById("sex").value,
-        goalWeight: parseFloat(document.getElementById("goal_weight").value),
-        activityLevel: parseFloat(document.getElementById("activity_level").value),
-        mealsPerDay: parseInt(document.getElementById("meals_per_day").value),
-        dietaryPreference: document.getElementById("dietary_preference").value
-      };
+    function clearErrors() {
+      document.getElementById("errorMessage").style.display = "none";
+      const errorElements = document.querySelectorAll(".validation-feedback");
+      errorElements.forEach(element => element.textContent = "");
     }
 
-    function validateForm(data) {
+    function validateForm() {
       let isValid = true;
       
       // Name validation
-      if (!data.name || data.name.length < 2) {
-        showError("nameError", "Please enter a valid name (at least 2 characters)");
+      const name = document.getElementById("name").value.trim();
+      if (!name) {
+        document.getElementById("nameError").textContent = "कृपया अपना नाम दर्ज करें (Please enter your name)";
         isValid = false;
       }
       
       // Age validation
-      if (!data.age || data.age < 20 || data.age > 70) {
-        showError("ageError", "Age must be between 20 and 70 years");
-        showGeneralError("Sorry! Diet plans are only available for individuals aged 20-70 years.");
+      const age = parseInt(document.getElementById("age").value);
+      if (!age || age < 18 || age > 70) {
+        document.getElementById("ageError").textContent = "आयु 18-70 वर्ष के बीच होनी चाहिए (Age must be between 18-70 years)";
         isValid = false;
       }
       
-      // Current weight validation
-      if (!data.currentWeight || data.currentWeight < 30 || data.currentWeight > 100) {
-        showError("weightError", "Current weight must be between 30 and 100 kg");
-        showGeneralError("Sorry! Diet plans are only available for weights between 30-100 kg.");
+      // Weight validation
+      const weight = parseFloat(document.getElementById("current_weight").value);
+      if (!weight || weight < 30 || weight > 120) {
+        document.getElementById("weightError").textContent = "वजन 30-120 किलो के बीच होना चाहिए (Weight must be between 30-120 kg)";
         isValid = false;
       }
       
       // Height validation
-      if (!data.height || data.height < 120 || data.height > 250) {
-        showError("heightError", "Please enter a valid height between 120-250 cm");
+      const height = parseInt(document.getElementById("height").value);
+      if (!height || height < 120 || height > 250) {
+        document.getElementById("heightError").textContent = "ऊंचाई 120-250 सेमी के बीच होनी चाहिए (Height must be between 120-250 cm)";
         isValid = false;
       }
       
       // Gender validation
-      if (!data.sex) {
-        showError("sexError", "Please select your gender");
+      const sex = document.getElementById("sex").value;
+      if (!sex) {
+        document.getElementById("sexError").textContent = "कृपया लिंग चुनें (Please select gender)";
         isValid = false;
       }
       
       // Goal weight validation
-      if (!data.goalWeight || data.goalWeight < 30 || data.goalWeight > 100) {
-        showError("goalWeightError", "Goal weight must be between 30 and 100 kg");
+      const goalWeight = parseFloat(document.getElementById("goal_weight").value);
+      if (!goalWeight || goalWeight < 30 || goalWeight > 120) {
+        document.getElementById("goalWeightError").textContent = "लक्ष्य वजन 30-120 किलो के बीच होना चाहिए (Goal weight must be between 30-120 kg)";
         isValid = false;
       }
       
       // Activity level validation
-      if (!data.activityLevel) {
-        showError("activityError", "Please select your activity level");
+      const activityLevel = document.getElementById("activity_level").value;
+      if (!activityLevel) {
+        document.getElementById("activityError").textContent = "कृपया गतिविधि स्तर चुनें (Please select activity level)";
         isValid = false;
       }
       
       // Meals per day validation
-      if (!data.mealsPerDay) {
-        showError("mealsError", "Please select number of meals per day");
+      const mealsPerDay = document.getElementById("meals_per_day").value;
+      if (!mealsPerDay) {
+        document.getElementById("mealsError").textContent = "कृपया दैनिक भोजन की संख्या चुनें (Please select meals per day)";
         isValid = false;
       }
       
       // Dietary preference validation
-      if (!data.dietaryPreference) {
-        showError("dietaryError", "Please select your dietary preference");
+      const dietaryPreference = document.getElementById("dietary_preference").value;
+      if (!dietaryPreference) {
+        document.getElementById("dietaryError").textContent = "कृपया आहार प्राथमिकता चुनें (Please select dietary preference)";
         isValid = false;
       }
       
       return isValid;
     }
 
-    function showError(elementId, message) {
-      const errorElement = document.getElementById(elementId);
-      errorElement.textContent = message;
-      errorElement.style.display = "block";
-    }
-
-    function showGeneralError(message) {
-      const errorDiv = document.getElementById("errorMessage");
-      errorDiv.textContent = message;
-      errorDiv.style.display = "block";
-      errorDiv.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function clearErrors() {
-      const errorElements = document.querySelectorAll('.validation-feedback');
-      errorElements.forEach(element => {
-        element.style.display = "none";
-        element.textContent = "";
-      });
-      
-      document.getElementById("errorMessage").style.display = "none";
-    }
-
-    function generateDietPlan(data) {
+    function generateIndianDietPlan(data) {
       // Calculate BMR using Mifflin-St Jeor Equation
-      let BMR;
-      if (data.sex === "Male") {
-        BMR = 10 * data.currentWeight + 6.25 * data.height - 5 * data.age + 5;
+      const height = parseInt(data.height);
+      const weight = parseFloat(data.current_weight);
+      const age = parseInt(data.age);
+      const sex = data.sex;
+      
+      let bmr;
+      if (sex === "Male") {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
       } else {
-        BMR = 10 * data.currentWeight + 6.25 * data.height - 5 * data.age - 161;
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
       }
-
-      // Calculate TDEE (Total Daily Energy Expenditure)
-      const TDEE = BMR * data.activityLevel;
-
-      // Adjust calories based on goal
-      let calorieTarget;
-      let goalType;
-      if (data.goalWeight < data.currentWeight) {
-        calorieTarget = TDEE - 500; // Weight loss
-        goalType = "Weight Loss";
-      } else if (data.goalWeight > data.currentWeight) {
-        calorieTarget = TDEE + 300; // Weight gain
-        goalType = "Weight Gain";
+      
+      // Calculate TDEE
+      const activityLevel = parseFloat(data.activity_level);
+      const tdee = bmr * activityLevel;
+      
+      // Determine calorie goal based on weight goal
+      const goalWeight = parseFloat(data.goal_weight);
+      let calorieGoal;
+      let weightGoal;
+      
+      if (goalWeight < weight) {
+        calorieGoal = tdee - 500; // Weight loss
+        weightGoal = "वजन घटाना (Weight Loss)";
+      } else if (goalWeight > weight) {
+        calorieGoal = tdee + 300; // Weight gain
+        weightGoal = "वजन बढ़ाना (Weight Gain)";
       } else {
-        calorieTarget = TDEE; // Maintenance
-        goalType = "Weight Maintenance";
+        calorieGoal = tdee; // Maintenance
+        weightGoal = "वजन बनाए रखना (Weight Maintenance)";
       }
-
-      // Ensure minimum calorie intake
-      calorieTarget = Math.max(calorieTarget, 1200);
-
-      // Calculate calories per meal
-      const caloriesPerMeal = Math.round(calorieTarget / data.mealsPerDay);
-
-      // Calculate macronutrient distribution
-      const carbsGrams = Math.round((calorieTarget * 0.50) / 4); // 50% carbs
-      const proteinGrams = Math.round((calorieTarget * 0.25) / 4); // 25% protein
-      const fatGrams = Math.round((calorieTarget * 0.25) / 9); // 25% fat
-
-      // Generate meal suggestions based on dietary preference
-      const mealSuggestions = getMealSuggestions(data.dietaryPreference, data.mealsPerDay, caloriesPerMeal);
-
-      // Calculate estimated timeline
-      const weightDifference = Math.abs(data.goalWeight - data.currentWeight);
-      const estimatedWeeks = Math.ceil(weightDifference / 0.5); // Assuming 0.5kg per week
-      const estimatedMonths = Math.ceil(estimatedWeeks / 4);
-
-      // Display the diet plan
+      
+      // Calculate macros
+      const protein = Math.round((calorieGoal * 0.25) / 4); // 25% protein
+      const carbs = Math.round((calorieGoal * 0.45) / 4); // 45% carbs
+      const fats = Math.round((calorieGoal * 0.30) / 9); // 30% fats
+      
+      // Generate Indian meal plan
+      const mealPlan = generateIndianMealPlan(data.dietary_preference, parseInt(data.meals_per_day), calorieGoal);
+      
+      // Calculate timeline
+      const weightDifference = Math.abs(goalWeight - weight);
+      const weeksToGoal = Math.ceil(weightDifference / 0.5); // Assuming 0.5kg per week
+      
+      // Display results
       displayDietPlan({
         name: data.name,
-        goalType,
-        calorieTarget: Math.round(calorieTarget),
-        caloriesPerMeal,
-        carbsGrams,
-        proteinGrams,
-        fatGrams,
-        mealSuggestions,
-        estimatedMonths,
-        currentWeight: data.currentWeight,
-        goalWeight: data.goalWeight
+        calorieGoal: Math.round(calorieGoal),
+        protein,
+        carbs,
+        fats,
+        weightGoal,
+        weeksToGoal,
+        mealPlan
       });
     }
 
-    function getMealSuggestions(dietaryPreference, mealsPerDay, caloriesPerMeal) {
-      const mealPlans = {
-        vegetarian: {
-          breakfast: ["Oatmeal with fruits and nuts", "Vegetarian scrambled eggs with toast", "Greek yogurt with granola"],
-          lunch: ["Quinoa salad with vegetables", "Lentil curry with brown rice", "Chickpea salad wrap"],
-          dinner: ["Grilled paneer with vegetables", "Vegetable stir-fry with tofu", "Bean and vegetable curry"],
-          snack: ["Mixed nuts and fruits", "Hummus with vegetable sticks", "Greek yogurt with berries"]
-        },
-        "non-vegetarian": {
-          breakfast: ["Eggs with whole grain toast", "Protein smoothie with banana", "Oatmeal with protein powder"],
-          lunch: ["Grilled chicken with quinoa", "Fish curry with brown rice", "Turkey and avocado wrap"],
-          dinner: ["Baked salmon with vegetables", "Lean beef with sweet potato", "Chicken stir-fry with broccoli"],
-          snack: ["Greek yogurt with nuts", "Boiled eggs with fruits", "Protein bar with almonds"]
-        },
-        vegan: {
-          breakfast: ["Chia seed pudding with fruits", "Smoothie bowl with plant protein", "Avocado toast with hemp seeds"],
-          lunch: ["Buddha bowl with tahini", "Lentil and vegetable curry", "Quinoa stuffed bell peppers"],
-          dinner: ["Tofu stir-fry with vegetables", "Black bean and sweet potato bowl", "Tempeh with roasted vegetables"],
-          snack: ["Mixed nuts and seeds", "Fruit with almond butter", "Coconut yogurt with berries"]
-        },
-        keto: {
-          breakfast: ["Scrambled eggs with avocado", "Keto smoothie with MCT oil", "Bacon and eggs with spinach"],
-          lunch: ["Grilled chicken salad", "Salmon with asparagus", "Zucchini noodles with pesto"],
-          dinner: ["Steak with broccoli", "Baked cod with cauliflower", "Pork chops with green beans"],
-          snack: ["Cheese and olives", "Nuts and seeds", "Avocado with sea salt"]
-        },
-        mediterranean: {
-          breakfast: ["Greek yogurt with honey and nuts", "Whole grain toast with olive oil", "Fruit and nut bowl"],
-          lunch: ["Mediterranean quinoa salad", "Grilled fish with vegetables", "Hummus and vegetable wrap"],
-          dinner: ["Baked chicken with herbs", "Seafood paella with vegetables", "Lamb with roasted vegetables"],
-          snack: ["Olives and cheese", "Fresh fruits", "Nuts with dried fruits"]
-        }
+    function generateIndianMealPlan(dietaryPreference, mealsPerDay, totalCalories) {
+      const caloriesPerMeal = Math.round(totalCalories / mealsPerDay);
+      
+      const vegMeals = {
+        breakfast: [
+          "दलिया उपमा + छाछ (Daliya Upma + Buttermilk)",
+          "पोहा + चाय (Poha + Tea)",
+          "इडली सांभर + नारियल चटनी (Idli Sambar + Coconut Chutney)",
+          "परांठा + दही + अचार (Paratha + Curd + Pickle)",
+          "ओट्स + दूध + फल (Oats + Milk + Fruits)"
+        ],
+        lunch: [
+          "दाल चावल + सब्जी + रोटी (Dal Rice + Vegetable + Roti)",
+          "राजमा चावल + सलाद (Rajma Rice + Salad)",
+          "छोले भटूरे + प्याज (Chole Bhature + Onions)",
+          "सांभर चावल + रसम (Sambar Rice + Rasam)",
+          "कढ़ी चावल + सब्जी (Kadhi Rice + Vegetable)"
+        ],
+        dinner: [
+          "रोटी + दाल + सब्जी + सलाद (Roti + Dal + Vegetable + Salad)",
+          "खिचड़ी + दही + पापड़ (Khichdi + Curd + Papad)",
+          "पराठा + दही + सब्जी (Paratha + Curd + Vegetable)",
+          "दोसा + सांभर + चटनी (Dosa + Sambar + Chutney)",
+          "पुलाव + रायता + पापड़ (Pulao + Raita + Papad)"
+        ],
+        snacks: [
+          "चना चाट + चाय (Chana Chaat + Tea)",
+          "फल + दूध (Fruits + Milk)",
+          "भेल पुरी + नींबू पानी (Bhel Puri + Lemon Water)",
+          "ढोकला + हरी चटनी (Dhokla + Green Chutney)",
+          "मूंगफली + चाय (Peanuts + Tea)"
+        ]
       };
-
-      const plan = mealPlans[dietaryPreference] || mealPlans["non-vegetarian"];
-      const meals = [];
-
-      const mealTypes = ["breakfast", "lunch", "dinner", "snack"];
+      
+      const nonVegMeals = {
+        breakfast: vegMeals.breakfast, // Same as veg for breakfast
+        lunch: [
+          "चिकन करी + चावल + रोटी (Chicken Curry + Rice + Roti)",
+          "मटन बिरयानी + रायता (Mutton Biryani + Raita)",
+          "फिश करी + चावल (Fish Curry + Rice)",
+          "अंडा करी + रोटी + सलाद (Egg Curry + Roti + Salad)",
+          "चिकन पुलाव + दही (Chicken Pulao + Curd)"
+        ],
+        dinner: [
+          "चिकन + रोटी + सलाद (Chicken + Roti + Salad)",
+          "फिश फ्राई + चावल + दाल (Fish Fry + Rice + Dal)",
+          "मटन करी + रोटी + सब्जी (Mutton Curry + Roti + Vegetable)",
+          "अंडा भुर्जी + पराठा (Egg Bhurji + Paratha)",
+          "चिकन टिक्का + नान + सलाद (Chicken Tikka + Naan + Salad)"
+        ],
+        snacks: [
+          "चिकन टिक्का + चाय (Chicken Tikka + Tea)",
+          "उबला अंडा + चाय (Boiled Egg + Tea)",
+          "फिश कटलेट + चाय (Fish Cutlet + Tea)",
+          ...vegMeals.snacks.slice(1) // Include some veg snacks
+        ]
+      };
+      
+      const meals = dietaryPreference === 'veg' ? vegMeals : nonVegMeals;
+      const mealTypes = ['breakfast', 'lunch', 'dinner'];
+      
+      if (mealsPerDay > 3) {
+        mealTypes.push('snacks');
+      }
+      if (mealsPerDay > 4) {
+        mealTypes.push('evening_snacks');
+      }
+      if (mealsPerDay > 5) {
+        mealTypes.push('pre_dinner');
+      }
+      
+      const mealPlan = [];
+      
       for (let i = 0; i < mealsPerDay; i++) {
-        const mealType = mealTypes[i % 4];
-        const suggestions = plan[mealType];
-        meals.push({
-          type: mealType.charAt(0).toUpperCase() + mealType.slice(1),
-          suggestion: suggestions[Math.floor(Math.random() * suggestions.length)],
+        const mealType = mealTypes[i] || 'snacks';
+        const mealOptions = meals[mealType] || meals.snacks;
+        const randomMeal = mealOptions[Math.floor(Math.random() * mealOptions.length)];
+        
+        mealPlan.push({
+          type: getMealTypeName(mealType, i),
+          food: randomMeal,
           calories: caloriesPerMeal
         });
       }
-
-      return meals;
+      
+      return mealPlan;
+    }
+    
+    function getMealTypeName(type, index) {
+      const names = {
+        breakfast: "🌅 नाश्ता (Breakfast)",
+        lunch: "🍛 दोपहर का खाना (Lunch)",
+        dinner: "🌙 रात का खाना (Dinner)",
+        snacks: "🍪 नाश्ता (Snacks)",
+        evening_snacks: "🍵 शाम का नाश्ता (Evening Snacks)",
+        pre_dinner: "🥗 डिनर से पहले (Pre-Dinner)"
+      };
+      
+      return names[type] || `भोजन ${index + 1} (Meal ${index + 1})`;
     }
 
-    function displayDietPlan(planData) {
+    function displayDietPlan(plan) {
       const outputDiv = document.getElementById("dietPlanOutput");
       
       const html = `
-        <h3>🎉 Congratulations ${planData.name}!</h3>
-        <p>Your personalized diet plan has been generated successfully!</p>
+        <h3 style="color: #27592d; text-align: center; margin-bottom: 25px; font-weight: 700;">
+          🎉 ${plan.name} जी के लिए व्यक्तिगत आहार योजना (Personal Diet Plan for ${plan.name})
+        </h3>
         
         <div class="nutrition-info">
-          <h4>📊 Your Daily Nutrition Target</h4>
-          <div class="row">
-            <div class="col-md-3 text-center">
-              <h5>${planData.calorieTarget}</h5>
-              <small>Daily Calories</small>
+          <h4>📊 पोषण लक्ष्य (Nutrition Goals)</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
+            <div>
+              <strong style="font-size: 1.5rem;">${plan.calorieGoal}</strong><br>
+              दैनिक कैलोरी (Daily Calories)
             </div>
-            <div class="col-md-3 text-center">
-              <h5>${planData.carbsGrams}g</h5>
-              <small>Carbohydrates</small>
+            <div>
+              <strong style="font-size: 1.5rem;">${plan.protein}g</strong><br>
+              प्रोटीन (Protein)
             </div>
-            <div class="col-md-3 text-center">
-              <h5>${planData.proteinGrams}g</h5>
-              <small>Protein</small>
+            <div>
+              <strong style="font-size: 1.5rem;">${plan.carbs}g</strong><br>
+              कार्बोहाइड्रेट (Carbs)
             </div>
-            <div class="col-md-3 text-center">
-              <h5>${planData.fatGrams}g</h5>
-              <small>Healthy Fats</small>
+            <div>
+              <strong style="font-size: 1.5rem;">${plan.fats}g</strong><br>
+              वसा (Fats)
             </div>
           </div>
-          <p class="text-center mt-3"><strong>Goal:</strong> ${planData.goalType} | <strong>Estimated Timeline:</strong> ${planData.estimatedMonths} months</p>
+          <div style="margin-top: 20px; text-align: center;">
+            <strong>लक्ष्य: ${plan.weightGoal}</strong><br>
+            <strong>अनुमानित समय: ${plan.weeksToGoal} सप्ताह (Estimated Time: ${plan.weeksToGoal} weeks)</strong>
+          </div>
         </div>
-
-        <h4>🍽️ Your Daily Meal Plan</h4>
-        ${planData.mealSuggestions.map((meal, index) => `
+        
+        <h4 style="color: #27592d; margin: 25px 0 20px 0; font-weight: 700;">🍽️ दैनिक भोजन योजना (Daily Meal Plan)</h4>
+        
+        ${plan.mealPlan.map(meal => `
           <div class="meal-card">
-            <div class="meal-title">${meal.type} ${index + 1}</div>
-            <p><strong>Suggested:</strong> ${meal.suggestion}</p>
-            <p><strong>Target Calories:</strong> ${meal.calories} kcal</p>
+            <div class="meal-title">${meal.type}</div>
+            <div style="color: #555; font-size: 1.1rem; margin-bottom: 10px;">
+              <strong>${meal.food}</strong>
+            </div>
+            <div style="color: #ff6b35; font-weight: 600;">
+              लगभग ${meal.calories} कैलोरी (Approx ${meal.calories} calories)
+            </div>
           </div>
         `).join('')}
-
-        <div class="mt-4 p-3" style="background: #e8f5e8; border-radius: 10px;">
-          <h5>🎯 Your Journey Summary</h5>
-          <ul class="mb-0">
-            <li><strong>Current Weight:</strong> ${planData.currentWeight} kg</li>
-            <li><strong>Goal Weight:</strong> ${planData.goalWeight} kg</li>
-            <li><strong>Weight to ${planData.goalType.includes('Loss') ? 'lose' : planData.goalType.includes('Gain') ? 'gain' : 'maintain'}:</strong> ${Math.abs(planData.goalWeight - planData.currentWeight)} kg</li>
-            <li><strong>Estimated Timeline:</strong> ${planData.estimatedMonths} months with consistent effort</li>
-          </ul>
+        
+        <div style="background: linear-gradient(135deg, #fff2e6 0%, #ffe6cc 100%); border-radius: 15px; padding: 20px; margin-top: 25px; border: 2px solid #ff6b35;">
+          <h5 style="color: #d2691e; margin-bottom: 15px; font-weight: 700;">⚠️ महत्वपूर्ण सूचना (Important Notice)</h5>
+          <p style="color: #d2691e; margin-bottom: 10px; font-weight: 500;">
+            <strong>यह आहार योजना आवश्यक है, पोषण विशेषज्ञ द्वारा अनुशंसित नहीं।</strong><br>
+            <strong>This diet plan is necessary but NOT recommended by a dietitian.</strong>
+          </p>
+          <p style="color: #d2691e; margin-bottom: 0; font-weight: 500;">
+            कृपया इस योजना का पालन करने से पहले किसी योग्य पोषण विशेषज्ञ से सलाह लें।<br>
+            Please consult with a qualified nutritionist before following this plan.
+          </p>
         </div>
-
-        <div class="text-center mt-4">
-          <button class="btn btn-generate" onclick="window.print()" style="width: auto; padding: 10px 30px;">
-            🖨️ Print My Diet Plan
+        
+        <div style="background: linear-gradient(135deg, #e6ffe6 0%, #ccffcc 100%); border-radius: 15px; padding: 20px; margin-top: 20px; border: 2px solid #27592d; text-align: center;">
+          <p style="color: #27592d; margin: 0; font-weight: 600; font-size: 1.1rem;">
+            📞 <strong>अब एक योग्य पोषण विशेषज्ञ से मिलें!</strong><br>
+            <strong>Now visit a qualified nutritionist!</strong>
+          </p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 25px;">
+          <button onclick="window.print()" style="background: linear-gradient(135deg, #ff6b35 0%, #27592d 100%); color: white; border: none; padding: 15px 30px; border-radius: 25px; font-size: 16px; font-weight: 600; cursor: pointer;">
+            🖨️ आहार योजना प्रिंट करें (Print Diet Plan)
           </button>
         </div>
       `;
