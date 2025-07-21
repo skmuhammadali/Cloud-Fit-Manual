@@ -4,154 +4,589 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>CloudFit | Diet Plan</title>
+  <title>FitLife | Personalized Diet Plans</title>
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+    }
+
+    .main-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      margin: 20px auto;
+      max-width: 800px;
+      padding: 40px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      color: #333;
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 2.5rem;
+    }
+
+    .header p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      border: 2px solid #e0e0e0;
+      padding: 12px 15px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+
+    .btn-generate {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 15px 40px;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn-generate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .error-message {
+      background: #ffe6e6;
+      border: 1px solid #ff9999;
+      border-radius: 8px;
+      color: #cc0000;
+      padding: 15px;
+      margin: 20px 0;
+      display: none;
+    }
+
+    .diet-plan-output {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      display: none;
+    }
+
+    .meal-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .meal-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .meal-title {
+      color: #667eea;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .nutrition-info {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .guidelines {
+      background: #e8f4fd;
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    .guidelines h5 {
+      color: #2c5aa0;
+      margin-bottom: 15px;
+    }
+
+    .validation-feedback {
+      display: block;
+      color: #dc3545;
+      font-size: 0.875em;
+      margin-top: 5px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .main-container {
+        margin: 10px;
+        padding: 20px;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="main-container">
+    <div class="header">
+      <h1>🥗 FitLife Diet Planner</h1>
+      <p>Get your personalized diet plan based on your health goals and lifestyle</p>
+    </div>
 
-  <!-- Diet Plan Form Section -->
-  <section id="dietPlan" class="dietPlan section">
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-      <h2 class="text-center mt-5">Create Your Personalized Diet Plan</h2>
-      <form id="dietForm" method="POST" class="mt-4">
+    <div class="error-message" id="errorMessage"></div>
+
+    <form id="dietForm" novalidate>
+      <div class="form-row">
         <div class="form-group">
-          <label for="age">Age</label>
-          <input type="number" class="form-control" name="age" id="age" required>
+          <label for="name" class="form-label"><strong>Full Name</strong></label>
+          <input type="text" class="form-control" name="name" id="name" required>
+          <div class="validation-feedback" id="nameError"></div>
         </div>
+        
         <div class="form-group">
-          <label for="current_weight">Current Weight (kg)</label>
-          <input type="number" class="form-control" name="current_weight" id="current_weight" required>
+          <label for="age" class="form-label"><strong>Age (20-70 years)</strong></label>
+          <input type="number" class="form-control" name="age" id="age" min="20" max="70" required>
+          <div class="validation-feedback" id="ageError"></div>
         </div>
+      </div>
+
+      <div class="form-row">
         <div class="form-group">
-          <label for="height">Height (in cm)</label>
-          <input type="number" class="form-control" name="height" id="height" required>
+          <label for="current_weight" class="form-label"><strong>Current Weight (30-100 kg)</strong></label>
+          <input type="number" class="form-control" name="current_weight" id="current_weight" min="30" max="100" step="0.1" required>
+          <div class="validation-feedback" id="weightError"></div>
         </div>
+        
         <div class="form-group">
-          <label for="sex">Sex</label>
-          <select name="sex" class="form-control" required>
+          <label for="height" class="form-label"><strong>Height (cm)</strong></label>
+          <input type="number" class="form-control" name="height" id="height" min="120" max="250" required>
+          <div class="validation-feedback" id="heightError"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="sex" class="form-label"><strong>Gender</strong></label>
+          <select name="sex" id="sex" class="form-control" required>
+            <option value="">Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
+          <div class="validation-feedback" id="sexError"></div>
         </div>
+        
         <div class="form-group">
-          <label for="goal_weight">Goal Weight (kg)</label>
-          <input type="number" class="form-control" name="goal_weight" id="goal_weight" required>
+          <label for="goal_weight" class="form-label"><strong>Goal Weight (30-100 kg)</strong></label>
+          <input type="number" class="form-control" name="goal_weight" id="goal_weight" min="30" max="100" step="0.1" required>
+          <div class="validation-feedback" id="goalWeightError"></div>
         </div>
-        <div class="form-group">
-          <label for="meals_per_day">Meals per Day</label>
-          <select name="meals_per_day" class="form-control" required>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="timeline">Target Timeline (Months)</label>
-          <select name="timeline" class="form-control" required>
-            <option value="3">3</option>
-            <option value="6">6</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="activity_level">Activity Level</label>
-          <select name="activity_level" class="form-control" required>
-            <option value="1.2">Sedentary (little or no exercise)</option>
-            <option value="1.375">Lightly Active (light exercise/sports 1-3 days/week)</option>
-            <option value="1.55">Moderately Active (moderate exercise/sports 3-5 days/week)</option>
-            <option value="1.725">Very Active (hard exercise/sports 6-7 days a week)</option>
-            <option value="1.9">Super Active (very hard exercise/sports & physical job)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success w-100 mt-3">Generate Diet Plan</button>
-        </div>
-      </form>
-
-      <!-- Output of the generated diet plan -->
-      <div id="dietPlanOutput" class="mt-4"></div>
-
-      <!-- Detailed Notes Section -->
-      <div class="mt-5">
-        <h5><strong>Diet Plan Guidelines</strong></h5>
-        <p>Follow this plan every week to stay on track toward your goal weight. Based on your **caloric needs** and the number of **meals per day**, this diet plan is designed to help you achieve your target in a healthy and sustainable way. Here's what you need to keep in mind:</p>
-        <ul>
-          <li>Make sure to stick to the **calories per meal** for each meal and avoid overindulging.</li>
-          <li>Maintain a **healthy balance** of proteins, fats, and carbohydrates to ensure proper nutrition.</li>
-          <li>Stay hydrated with plenty of water throughout the day.</li>
-        </ul>
-
-        <h5><strong>Cheat Days</strong></h5>
-        <p>We understand that sometimes you want to treat yourself. To help with that, we allow **3 cheat days every month**. These days can be used to indulge in your favorite foods without guilt. Here's how it works:</p>
-        <ul>
-          <li>You are allowed **one cheat day per week**.</li>
-          <li>During your cheat day, you can enjoy your favorite foods, but try not to overeat.</li>
-          <li>After your cheat day, get back to the diet plan to stay on track with your weight loss goals.</li>
-        </ul>
-        <p>Keep in mind, cheat days are a way to stay motivated and keep your diet sustainable over the long term. However, don't let them derail your progress toward your target weight. Stay consistent, and you'll reach your goal!</p>
       </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="activity_level" class="form-label"><strong>Activity Level</strong></label>
+          <select name="activity_level" id="activity_level" class="form-control" required>
+            <option value="">Select Activity Level</option>
+            <option value="1.2">Sedentary (little or no exercise)</option>
+            <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
+            <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
+            <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+            <option value="1.9">Super Active (very hard exercise & physical job)</option>
+          </select>
+          <div class="validation-feedback" id="activityError"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="meals_per_day" class="form-label"><strong>Meals per Day</strong></label>
+          <select name="meals_per_day" id="meals_per_day" class="form-control" required>
+            <option value="">Select Meals</option>
+            <option value="3">3 Meals</option>
+            <option value="4">4 Meals</option>
+            <option value="5">5 Meals</option>
+            <option value="6">6 Meals</option>
+          </select>
+          <div class="validation-feedback" id="mealsError"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dietary_preference" class="form-label"><strong>Dietary Preference</strong></label>
+        <select name="dietary_preference" id="dietary_preference" class="form-control" required>
+          <option value="">Select Preference</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="non-vegetarian">Non-Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="keto">Keto</option>
+          <option value="mediterranean">Mediterranean</option>
+        </select>
+        <div class="validation-feedback" id="dietaryError"></div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-generate">
+          🎯 Generate My Personal Diet Plan
+        </button>
+      </div>
+    </form>
+
+    <!-- Diet Plan Output -->
+    <div id="dietPlanOutput" class="diet-plan-output"></div>
+
+    <!-- Guidelines Section -->
+    <div class="guidelines">
+      <h5><strong>📋 Important Guidelines</strong></h5>
+      <ul>
+        <li><strong>Age Requirement:</strong> Diet plans are available for individuals aged 20-70 years</li>
+        <li><strong>Weight Range:</strong> Acceptable weight range is 30-100 kg</li>
+        <li><strong>Hydration:</strong> Drink at least 8-10 glasses of water daily</li>
+        <li><strong>Consistency:</strong> Follow the plan consistently for best results</li>
+        <li><strong>Medical Consultation:</strong> Consult with a healthcare provider before starting any new diet plan</li>
+      </ul>
+      
+      <h5><strong>🍰 Cheat Days Policy</strong></h5>
+      <ul>
+        <li>Maximum 3 cheat days per month allowed</li>
+        <li>Space out cheat days evenly throughout the month</li>
+        <li>Return to your regular plan immediately after a cheat day</li>
+        <li>Use cheat days as motivation, not as an excuse to overindulge</li>
+      </ul>
     </div>
-  </section>
+  </div>
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    // Handle form submission and calculate diet plan
+    // Comprehensive diet plan generator with validation
     document.getElementById("dietForm").addEventListener("submit", function (e) {
       e.preventDefault();
-
+      
+      // Clear previous errors
+      clearErrors();
+      
       // Get form data
-      const age = parseInt(document.getElementById("age").value);
-      const currentWeight = parseInt(document.getElementById("current_weight").value);
-      const height = parseInt(document.getElementById("height").value);
-      const sex = document.querySelector("select[name='sex']").value;
-      const goalWeight = parseInt(document.getElementById("goal_weight").value);
-      const mealsPerDay = parseInt(document.querySelector("select[name='meals_per_day']").value);
-      const timeline = parseInt(document.querySelector("select[name='timeline']").value);
-      const activityLevel = parseFloat(document.querySelector("select[name='activity_level']").value);
+      const formData = getFormData();
+      
+      // Validate form
+      if (!validateForm(formData)) {
+        return;
+      }
+      
+      // Generate and display diet plan
+      generateDietPlan(formData);
+    });
 
-      // Mifflin-St Jeor Equation to calculate BMR (Basal Metabolic Rate)
+    function getFormData() {
+      return {
+        name: document.getElementById("name").value.trim(),
+        age: parseInt(document.getElementById("age").value),
+        currentWeight: parseFloat(document.getElementById("current_weight").value),
+        height: parseInt(document.getElementById("height").value),
+        sex: document.getElementById("sex").value,
+        goalWeight: parseFloat(document.getElementById("goal_weight").value),
+        activityLevel: parseFloat(document.getElementById("activity_level").value),
+        mealsPerDay: parseInt(document.getElementById("meals_per_day").value),
+        dietaryPreference: document.getElementById("dietary_preference").value
+      };
+    }
+
+    function validateForm(data) {
+      let isValid = true;
+      
+      // Name validation
+      if (!data.name || data.name.length < 2) {
+        showError("nameError", "Please enter a valid name (at least 2 characters)");
+        isValid = false;
+      }
+      
+      // Age validation
+      if (!data.age || data.age < 20 || data.age > 70) {
+        showError("ageError", "Age must be between 20 and 70 years");
+        showGeneralError("Sorry! Diet plans are only available for individuals aged 20-70 years.");
+        isValid = false;
+      }
+      
+      // Current weight validation
+      if (!data.currentWeight || data.currentWeight < 30 || data.currentWeight > 100) {
+        showError("weightError", "Current weight must be between 30 and 100 kg");
+        showGeneralError("Sorry! Diet plans are only available for weights between 30-100 kg.");
+        isValid = false;
+      }
+      
+      // Height validation
+      if (!data.height || data.height < 120 || data.height > 250) {
+        showError("heightError", "Please enter a valid height between 120-250 cm");
+        isValid = false;
+      }
+      
+      // Gender validation
+      if (!data.sex) {
+        showError("sexError", "Please select your gender");
+        isValid = false;
+      }
+      
+      // Goal weight validation
+      if (!data.goalWeight || data.goalWeight < 30 || data.goalWeight > 100) {
+        showError("goalWeightError", "Goal weight must be between 30 and 100 kg");
+        isValid = false;
+      }
+      
+      // Activity level validation
+      if (!data.activityLevel) {
+        showError("activityError", "Please select your activity level");
+        isValid = false;
+      }
+      
+      // Meals per day validation
+      if (!data.mealsPerDay) {
+        showError("mealsError", "Please select number of meals per day");
+        isValid = false;
+      }
+      
+      // Dietary preference validation
+      if (!data.dietaryPreference) {
+        showError("dietaryError", "Please select your dietary preference");
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    function showError(elementId, message) {
+      const errorElement = document.getElementById(elementId);
+      errorElement.textContent = message;
+      errorElement.style.display = "block";
+    }
+
+    function showGeneralError(message) {
+      const errorDiv = document.getElementById("errorMessage");
+      errorDiv.textContent = message;
+      errorDiv.style.display = "block";
+      errorDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function clearErrors() {
+      const errorElements = document.querySelectorAll('.validation-feedback');
+      errorElements.forEach(element => {
+        element.style.display = "none";
+        element.textContent = "";
+      });
+      
+      document.getElementById("errorMessage").style.display = "none";
+    }
+
+    function generateDietPlan(data) {
+      // Calculate BMR using Mifflin-St Jeor Equation
       let BMR;
-      if (sex === "Male") {
-        BMR = 10 * currentWeight + 6.25 * height - 5 * age + 5;
+      if (data.sex === "Male") {
+        BMR = 10 * data.currentWeight + 6.25 * data.height - 5 * data.age + 5;
       } else {
-        BMR = 10 * currentWeight + 6.25 * height - 5 * age - 161;
+        BMR = 10 * data.currentWeight + 6.25 * data.height - 5 * data.age - 161;
       }
 
-      // Adjust BMR based on activity level to calculate TDEE (Total Daily Energy Expenditure)
-      const TDEE = BMR * activityLevel;
+      // Calculate TDEE (Total Daily Energy Expenditure)
+      const TDEE = BMR * data.activityLevel;
 
-      // Calculate calories per day and calories per meal
-      const caloriesPerDay = TDEE;  // Total daily calories needed
-      const caloriesPerMeal = caloriesPerDay / mealsPerDay;
+      // Adjust calories based on goal
+      let calorieTarget;
+      let goalType;
+      if (data.goalWeight < data.currentWeight) {
+        calorieTarget = TDEE - 500; // Weight loss
+        goalType = "Weight Loss";
+      } else if (data.goalWeight > data.currentWeight) {
+        calorieTarget = TDEE + 300; // Weight gain
+        goalType = "Weight Gain";
+      } else {
+        calorieTarget = TDEE; // Maintenance
+        goalType = "Weight Maintenance";
+      }
 
-      // Allocate calories to macronutrients (percentage split)
-      const carbs = (caloriesPerDay * 0.55) / 4; // 55% from carbs (4 calories per gram)
-      const proteins = (caloriesPerDay * 0.25) / 4; // 25% from protein (4 calories per gram)
-      const fats = (caloriesPerDay * 0.20) / 9; // 20% from fats (9 calories per gram)
+      // Ensure minimum calorie intake
+      calorieTarget = Math.max(calorieTarget, 1200);
 
-      // Dummy meal plan based on macronutrient allocation
-      const mealPlan = `
-        <h4>Your Custom Diet Plan</h4>
-        <table class="table">
-          <tr><th>Meal</th><th>Food</th><th>Calories</th></tr>
-          <tr><td>Breakfast</td><td>Oatmeal, Eggs, Banana</td><td>${Math.round(caloriesPerMeal)} kcal</td></tr>
-          <tr><td>Lunch</td><td>Chicken Breast, Rice, Broccoli</td><td>${Math.round(caloriesPerMeal)} kcal</td></tr>
-          <tr><td>Dinner</td><td>Grilled Salmon, Sweet Potato, Spinach</td><td>${Math.round(caloriesPerMeal)} kcal</td></tr>
-          <tr><td>Snacks</td><td>Greek Yogurt, Almonds</td><td>${Math.round(caloriesPerMeal)} kcal</td></tr>
-        </table>
-        <h5>Macronutrient Breakdown:</h5>
-        <ul>
-          <li>Carbohydrates: ${Math.round(carbs)} grams</li>
-          <li>Proteins: ${Math.round(proteins)} grams</li>
-          <li>Fats: ${Math.round(fats)} grams</li>
-        </ul>
-      `;
+      // Calculate calories per meal
+      const caloriesPerMeal = Math.round(calorieTarget / data.mealsPerDay);
+
+      // Calculate macronutrient distribution
+      const carbsGrams = Math.round((calorieTarget * 0.50) / 4); // 50% carbs
+      const proteinGrams = Math.round((calorieTarget * 0.25) / 4); // 25% protein
+      const fatGrams = Math.round((calorieTarget * 0.25) / 9); // 25% fat
+
+      // Generate meal suggestions based on dietary preference
+      const mealSuggestions = getMealSuggestions(data.dietaryPreference, data.mealsPerDay, caloriesPerMeal);
+
+      // Calculate estimated timeline
+      const weightDifference = Math.abs(data.goalWeight - data.currentWeight);
+      const estimatedWeeks = Math.ceil(weightDifference / 0.5); // Assuming 0.5kg per week
+      const estimatedMonths = Math.ceil(estimatedWeeks / 4);
 
       // Display the diet plan
-      document.getElementById("dietPlanOutput").innerHTML = mealPlan;
-    });
-  </script>
+      displayDietPlan({
+        name: data.name,
+        goalType,
+        calorieTarget: Math.round(calorieTarget),
+        caloriesPerMeal,
+        carbsGrams,
+        proteinGrams,
+        fatGrams,
+        mealSuggestions,
+        estimatedMonths,
+        currentWeight: data.currentWeight,
+        goalWeight: data.goalWeight
+      });
+    }
 
+    function getMealSuggestions(dietaryPreference, mealsPerDay, caloriesPerMeal) {
+      const mealPlans = {
+        vegetarian: {
+          breakfast: ["Oatmeal with fruits and nuts", "Vegetarian scrambled eggs with toast", "Greek yogurt with granola"],
+          lunch: ["Quinoa salad with vegetables", "Lentil curry with brown rice", "Chickpea salad wrap"],
+          dinner: ["Grilled paneer with vegetables", "Vegetable stir-fry with tofu", "Bean and vegetable curry"],
+          snack: ["Mixed nuts and fruits", "Hummus with vegetable sticks", "Greek yogurt with berries"]
+        },
+        "non-vegetarian": {
+          breakfast: ["Eggs with whole grain toast", "Protein smoothie with banana", "Oatmeal with protein powder"],
+          lunch: ["Grilled chicken with quinoa", "Fish curry with brown rice", "Turkey and avocado wrap"],
+          dinner: ["Baked salmon with vegetables", "Lean beef with sweet potato", "Chicken stir-fry with broccoli"],
+          snack: ["Greek yogurt with nuts", "Boiled eggs with fruits", "Protein bar with almonds"]
+        },
+        vegan: {
+          breakfast: ["Chia seed pudding with fruits", "Smoothie bowl with plant protein", "Avocado toast with hemp seeds"],
+          lunch: ["Buddha bowl with tahini", "Lentil and vegetable curry", "Quinoa stuffed bell peppers"],
+          dinner: ["Tofu stir-fry with vegetables", "Black bean and sweet potato bowl", "Tempeh with roasted vegetables"],
+          snack: ["Mixed nuts and seeds", "Fruit with almond butter", "Coconut yogurt with berries"]
+        },
+        keto: {
+          breakfast: ["Scrambled eggs with avocado", "Keto smoothie with MCT oil", "Bacon and eggs with spinach"],
+          lunch: ["Grilled chicken salad", "Salmon with asparagus", "Zucchini noodles with pesto"],
+          dinner: ["Steak with broccoli", "Baked cod with cauliflower", "Pork chops with green beans"],
+          snack: ["Cheese and olives", "Nuts and seeds", "Avocado with sea salt"]
+        },
+        mediterranean: {
+          breakfast: ["Greek yogurt with honey and nuts", "Whole grain toast with olive oil", "Fruit and nut bowl"],
+          lunch: ["Mediterranean quinoa salad", "Grilled fish with vegetables", "Hummus and vegetable wrap"],
+          dinner: ["Baked chicken with herbs", "Seafood paella with vegetables", "Lamb with roasted vegetables"],
+          snack: ["Olives and cheese", "Fresh fruits", "Nuts with dried fruits"]
+        }
+      };
+
+      const plan = mealPlans[dietaryPreference] || mealPlans["non-vegetarian"];
+      const meals = [];
+
+      const mealTypes = ["breakfast", "lunch", "dinner", "snack"];
+      for (let i = 0; i < mealsPerDay; i++) {
+        const mealType = mealTypes[i % 4];
+        const suggestions = plan[mealType];
+        meals.push({
+          type: mealType.charAt(0).toUpperCase() + mealType.slice(1),
+          suggestion: suggestions[Math.floor(Math.random() * suggestions.length)],
+          calories: caloriesPerMeal
+        });
+      }
+
+      return meals;
+    }
+
+    function displayDietPlan(planData) {
+      const outputDiv = document.getElementById("dietPlanOutput");
+      
+      const html = `
+        <h3>🎉 Congratulations ${planData.name}!</h3>
+        <p>Your personalized diet plan has been generated successfully!</p>
+        
+        <div class="nutrition-info">
+          <h4>📊 Your Daily Nutrition Target</h4>
+          <div class="row">
+            <div class="col-md-3 text-center">
+              <h5>${planData.calorieTarget}</h5>
+              <small>Daily Calories</small>
+            </div>
+            <div class="col-md-3 text-center">
+              <h5>${planData.carbsGrams}g</h5>
+              <small>Carbohydrates</small>
+            </div>
+            <div class="col-md-3 text-center">
+              <h5>${planData.proteinGrams}g</h5>
+              <small>Protein</small>
+            </div>
+            <div class="col-md-3 text-center">
+              <h5>${planData.fatGrams}g</h5>
+              <small>Healthy Fats</small>
+            </div>
+          </div>
+          <p class="text-center mt-3"><strong>Goal:</strong> ${planData.goalType} | <strong>Estimated Timeline:</strong> ${planData.estimatedMonths} months</p>
+        </div>
+
+        <h4>🍽️ Your Daily Meal Plan</h4>
+        ${planData.mealSuggestions.map((meal, index) => `
+          <div class="meal-card">
+            <div class="meal-title">${meal.type} ${index + 1}</div>
+            <p><strong>Suggested:</strong> ${meal.suggestion}</p>
+            <p><strong>Target Calories:</strong> ${meal.calories} kcal</p>
+          </div>
+        `).join('')}
+
+        <div class="mt-4 p-3" style="background: #e8f5e8; border-radius: 10px;">
+          <h5>🎯 Your Journey Summary</h5>
+          <ul class="mb-0">
+            <li><strong>Current Weight:</strong> ${planData.currentWeight} kg</li>
+            <li><strong>Goal Weight:</strong> ${planData.goalWeight} kg</li>
+            <li><strong>Weight to ${planData.goalType.includes('Loss') ? 'lose' : planData.goalType.includes('Gain') ? 'gain' : 'maintain'}:</strong> ${Math.abs(planData.goalWeight - planData.currentWeight)} kg</li>
+            <li><strong>Estimated Timeline:</strong> ${planData.estimatedMonths} months with consistent effort</li>
+          </ul>
+        </div>
+
+        <div class="text-center mt-4">
+          <button class="btn btn-generate" onclick="window.print()" style="width: auto; padding: 10px 30px;">
+            🖨️ Print My Diet Plan
+          </button>
+        </div>
+      `;
+
+      outputDiv.innerHTML = html;
+      outputDiv.style.display = "block";
+      outputDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 
 </html>
