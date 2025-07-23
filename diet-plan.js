@@ -1,52 +1,65 @@
-// diet-plan.js
-document.getElementById("dietForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+// diet-plan.js - Enhanced version for better integration
+// This file is now integrated into the main HTML file and this standalone version is kept for backup
 
-  // Get form data
-  const age = parseInt(document.querySelector('input[name="age"]').value);
-  const currentWeight = parseInt(document.querySelector('input[name="current_weight"]').value);
-  const height = parseInt(document.querySelector('input[name="height"]').value);
-  const sex = document.querySelector('select[name="sex"]').value;
-  const goalWeight = parseInt(document.querySelector('input[name="goal_weight"]').value);
-  const mealsPerDay = parseInt(document.querySelector('select[name="meals_per_day"]').value);
-  const timeline = parseInt(document.querySelector('input[name="timeline"]').value);
+// Simple backup functionality
+function generateSimpleDietPlan() {
+  const form = document.getElementById("dietForm");
+  if (!form) return;
 
-  // Calculate BMR (Mifflin-St Jeor Equation)
-  let BMR;
-  if (sex === "Male") {
-    BMR = (10 * currentWeight) + (6.25 * height) - (5 * age) + 5;
-  } else {
-    BMR = (10 * currentWeight) + (6.25 * height) - (5 * age) - 161;
-  }
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
 
-  // Get Activity Level (for simplicity, we'll assume sedentary)
-  let activityFactor = 1.2; // Sedentary
-  let TDEE = BMR * activityFactor;
+    // Basic form data extraction
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
 
-  // Adjust calories based on goal (if goal weight is different from current weight)
-  let calorieTarget = TDEE;
-  if (goalWeight < currentWeight) {
-    calorieTarget = TDEE - 500; // Creating a deficit of 500 calories for weight loss
-  } else if (goalWeight > currentWeight) {
-    calorieTarget = TDEE + 500; // Creating a surplus of 500 calories for weight gain
-  }
+    // Simple BMR calculation
+    const weight = parseFloat(data.current_weight) || 70;
+    const height = parseInt(data.height) || 170;
+    const age = parseInt(data.age) || 25;
+    const gender = data.gender || 'male';
 
-  // Divide by meals per day to get per meal target
-  const caloriesPerMeal = calorieTarget / mealsPerDay;
+    let bmr;
+    if (gender === 'male') {
+      bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+    } else {
+      bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+    }
 
-  // Display the result
-  alert(`
-    Diet Plan Generated:
-    - Goal Weight: ${goalWeight} kg
-    - Daily Calories: ${calorieTarget} kcal
-    - Calories per Meal: ${Math.round(caloriesPerMeal)} kcal
-    - Timeline: ${timeline} months
+    const activityMultipliers = {
+      sedentary: 1.2,
+      lightly_active: 1.375,
+      moderately_active: 1.55,
+      very_active: 1.725,
+      extra_active: 1.9
+    };
 
-    We suggest:
-    - Breakfast: ${Math.round(caloriesPerMeal)} kcal
-    - Lunch: ${Math.round(caloriesPerMeal)} kcal
-    - Dinner: ${Math.round(caloriesPerMeal)} kcal
-    - Snacks: ${Math.round(caloriesPerMeal)} kcal (if meals per day >= 4)
-    - Additional meals based on your preference.
-  `);
+    const activityLevel = data.activity_level || 'moderately_active';
+    const dailyCalories = Math.round(bmr * activityMultipliers[activityLevel]);
+
+    // Display basic result
+    const output = document.getElementById('dietPlanOutput');
+    if (output) {
+      output.innerHTML = `
+        <h3>Your Basic Diet Plan</h3>
+        <div style="background: rgba(26, 77, 58, 0.8); border-radius: 15px; padding: 25px; margin: 20px 0;">
+          <h4>Daily Calorie Target: ${dailyCalories} calories</h4>
+          <p>Based on your BMR: ${Math.round(bmr)} calories</p>
+          <p>Activity Level: ${activityLevel.replace('_', ' ')}</p>
+          <p><strong>Note:</strong> This is a basic calculation. Use the main form above for a detailed plan.</p>
+        </div>
+      `;
+      output.style.display = 'block';
+    }
+  });
+}
+
+// Initialize if the main script hasn't loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if main DietPlanGenerator class exists, if not, use simple version
+  setTimeout(() => {
+    if (typeof DietPlanGenerator === 'undefined') {
+      generateSimpleDietPlan();
+    }
+  }, 1000);
 });

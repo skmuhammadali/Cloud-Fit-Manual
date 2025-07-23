@@ -335,9 +335,10 @@
     }
 
     .meal-content {
-      color: var(--text-gray);
+      color: var(--text-light);
       line-height: 1.6;
       font-size: 1.1rem;
+      font-weight: 500;
     }
 
     .nutrition-info {
@@ -390,16 +391,19 @@
     }
 
     .guidelines ul {
-      color: var(--text-gray);
+      color: var(--text-light);
       list-style: none;
       padding: 0;
+      font-weight: 500;
     }
 
     .guidelines li {
-      padding: 8px 0;
+      padding: 10px 0;
       display: flex;
       align-items: flex-start;
       gap: 10px;
+      font-size: 1.05rem;
+      line-height: 1.5;
     }
 
     .guidelines li::before {
@@ -599,6 +603,12 @@
           <i class="fas fa-utensils"></i> Diet Planner Royal
         </h1>
         <p>Get your personalized diet plan based on your health goals and lifestyle preferences</p>
+        
+        <!-- Important Disclaimer -->
+        <div style="background: rgba(255, 193, 7, 0.15); border: 2px solid #ffc107; border-radius: 15px; padding: 20px; margin: 25px 0; color: #ffc107; font-weight: 600; text-align: center; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);">
+          <i class="fas fa-exclamation-triangle" style="margin-right: 10px; font-size: 1.3rem;"></i>
+          <strong>IMPORTANT DISCLAIMER:</strong> This is NOT a nutritionist-recommended diet plan. These are general dietary suggestions based on your inputs. Please consult with a qualified nutritionist or healthcare professional before making significant dietary changes.
+        </div>
       </div>
 
       <div class="error-message" id="errorMessage"></div>
@@ -727,15 +737,21 @@
 
       <div class="guidelines">
         <h5>
-          <i class="fas fa-info-circle"></i> Important Guidelines
+          <i class="fas fa-info-circle"></i> Important Guidelines & Disclaimers
         </h5>
+        <div style="background: rgba(255, 107, 107, 0.15); border: 2px solid #ff6b6b; border-radius: 12px; padding: 20px; margin-bottom: 20px; color: #ff6b6b; font-weight: 600; text-align: center; font-size: 1.1rem;">
+          <i class="fas fa-exclamation-triangle" style="margin-right: 10px; font-size: 1.3rem;"></i>
+          <strong>MEDICAL DISCLAIMER:</strong> These are NOT nutritionist-recommended diet plans. This is a general dietary suggestion tool only.
+        </div>
         <ul>
-          <li>This tool provides general dietary guidance based on your inputs</li>
-          <li>Consult with a healthcare professional before making significant dietary changes</li>
-          <li>Individual nutritional needs may vary based on medical conditions</li>
+          <li><strong>ALWAYS consult with a qualified nutritionist or healthcare professional</strong> before making significant dietary changes</li>
+          <li>This tool provides general dietary guidance based on your inputs only</li>
+          <li>Individual nutritional needs may vary significantly based on medical conditions, metabolism, and genetics</li>
+          <li>These suggestions are not suitable for people with diabetes, heart disease, eating disorders, or other medical conditions</li>
           <li>Stay hydrated and aim for 8-10 glasses of water daily</li>
           <li>Include physical activity as part of your healthy lifestyle</li>
-          <li>Listen to your body and adjust portions based on hunger and satiety</li>
+          <li>Listen to your body and adjust portions based on hunger and satiety cues</li>
+          <li>If you experience any adverse effects, discontinue and consult a healthcare professional immediately</li>
         </ul>
       </div>
     </div>
@@ -1047,8 +1063,26 @@
         const output = this.dietPlanOutput;
         
         output.innerHTML = `
-          <h3><i class="fas fa-star"></i> Your Personalized Diet Plan</h3>
+          <h3><i class="fas fa-star"></i> Your Personalized Diet Plan for ${plan.personalInfo.name}</h3>
           
+          <!-- User Preferences Summary -->
+          <div style="background: rgba(26, 77, 58, 0.8); border-radius: 15px; padding: 25px; margin: 20px 0; border: 1px solid rgba(63, 168, 117, 0.3);">
+            <h4 style="color: var(--gold-accent); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-user-check"></i> Your Profile & Preferences
+            </h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; color: var(--text-gray); font-size: 1rem;">
+              <div><strong style="color: var(--light-green);">Age:</strong> ${plan.personalInfo.age} years</div>
+              <div><strong style="color: var(--light-green);">Weight:</strong> ${plan.personalInfo.current_weight} kg</div>
+              <div><strong style="color: var(--light-green);">Height:</strong> ${plan.personalInfo.height} cm</div>
+              <div><strong style="color: var(--light-green);">Gender:</strong> ${plan.personalInfo.gender.charAt(0).toUpperCase() + plan.personalInfo.gender.slice(1)}</div>
+              <div><strong style="color: var(--light-green);">Goal:</strong> ${plan.personalInfo.goal.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</div>
+              <div><strong style="color: var(--light-green);">Activity Level:</strong> ${plan.personalInfo.activity_level.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</div>
+              <div><strong style="color: var(--light-green);">Diet Preference:</strong> ${plan.personalInfo.dietary_preference.charAt(0).toUpperCase() + plan.personalInfo.dietary_preference.slice(1)}</div>
+              <div><strong style="color: var(--light-green);">BMR:</strong> ${Math.round(plan.bmr)} calories/day</div>
+            </div>
+            ${plan.personalInfo.health_conditions ? `<div style="margin-top: 15px;"><strong style="color: var(--light-green);">Health Considerations:</strong> <span style="color: var(--text-gray);">${plan.personalInfo.health_conditions}</span></div>` : ''}
+          </div>
+
           <div class="nutrition-info">
             <h4><i class="fas fa-chart-pie"></i> Daily Nutrition Goals</h4>
             <div class="nutrition-grid">
